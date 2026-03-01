@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Dark mode: class-based toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Custom theme tokens */
+@theme {
+  --color-neon-green: #39ff14;
+  --color-neon-blue: #00f0ff;
+  --color-neon-pink: #ff00ff;
+  --color-neon-orange: #ff6600;
+  --color-neon-yellow: #ffff00;
+
+  --color-surface-dark: #0a0a0f;
+  --color-surface-card: #12121a;
+  --color-surface-hover: #1a1a25;
+  --color-surface-light: #f8fafc;
+
+  --font-sans: "Pretendard Variable", "Pretendard", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+body {
+  @apply bg-surface-light text-gray-900 dark:bg-surface-dark dark:text-gray-100;
+  @apply transition-colors duration-300;
+  @apply antialiased;
+}
+
+.katex {
+  color: inherit;
+}
+
+.neon-glow {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
