@@ -12,6 +12,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: "concept/:subjectId/:unitId", element: <ConceptViewPage /> },
+      { path: "solve", element: <ProblemSolverPage /> },
       { path: "solve/:subjectId/:unitId", element: <ProblemSolverPage /> },
       { path: "explore", element: <FreeExplorePage /> },
       { path: "*", element: <NotFound /> },

@@ -5,6 +5,7 @@ import { cn } from "@/utils/cn";
 
 const NAV_ITEMS = [
   { to: "/", label: "홈" },
+  { to: "/solve", label: "문제 풀이" },
   { to: "/explore", label: "자유 탐구" },
 ];
 

@@ -1,8 +1,91 @@
-// 단계별 풀이 플레이어 — Phase 5에서 구현
-export function StepPlayer() {
+import { CheckCircle, XCircle } from "lucide-react";
+import type { SolutionStep } from "@/engine/sympy-bridge";
+import { KaTeX } from "@/components/common/KaTeX";
+import { cn } from "@/utils/cn";
+
+interface StepPlayerProps {
+  steps: SolutionStep[];
+  activeIndex: number;
+  onStepClick: (index: number) => void;
+  verified: boolean;
+  verificationDescription?: string;
+}
+
+export function StepPlayer({
+  steps,
+  activeIndex,
+  onStepClick,
+  verified,
+  verificationDescription,
+}: StepPlayerProps) {
   return (
-    <div className="p-4 rounded-lg border border-dashed border-gray-300 dark:border-white/10 text-center text-gray-400 dark:text-gray-500 text-sm">
-      풀이 단계 플레이어 (Phase 5)
+    <div className="space-y-1">
+      {steps.map((step, i) => (
+        <button
+          key={i}
+          onClick={() => onStepClick(i)}
+          className={cn(
+            "w-full text-left px-4 py-3 rounded-lg transition-all",
+            "border-l-2",
+            activeIndex === i
+              ? "border-l-neon-blue bg-blue-50 dark:bg-neon-blue/5"
+              : "border-l-transparent hover:bg-gray-50 dark:hover:bg-white/5",
+          )}
+          style={{ animationDelay: `${i * 80}ms` }}
+        >
+          <div className="flex items-start gap-3">
+            <span
+              className={cn(
+                "shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold",
+                activeIndex === i
+                  ? "bg-neon-blue/20 text-neon-blue"
+                  : "bg-gray-200 dark:bg-white/10 text-gray-500 dark:text-gray-400",
+              )}
+            >
+              {i + 1}
+            </span>
+            <div className="min-w-0 space-y-1">
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
+                {step.label}
+              </p>
+              <div className="overflow-x-auto">
+                <KaTeX latex={step.latex} display className="text-sm" />
+              </div>
+            </div>
+          </div>
+        </button>
+      ))}
+
+      {/* Verification badge */}
+      <div
+        className={cn(
+          "flex items-center gap-2 px-4 py-3 rounded-lg mt-2",
+          verified
+            ? "bg-emerald-50 dark:bg-emerald-500/5"
+            : "bg-red-50 dark:bg-red-500/5",
+        )}
+      >
+        {verified ? (
+          <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+        ) : (
+          <XCircle className="w-5 h-5 text-red-500 shrink-0" />
+        )}
+        <div>
+          <p
+            className={cn(
+              "text-sm font-medium",
+              verified ? "text-emerald-700 dark:text-emerald-400" : "text-red-700 dark:text-red-400",
+            )}
+          >
+            {verified ? "검증 완료" : "검증 실패"}
+          </p>
+          {verificationDescription && (
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              {verificationDescription}
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
