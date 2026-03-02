@@ -6,6 +6,7 @@ import { useConceptStore } from "@/store/useConceptStore";
 import { ConceptScene } from "@/components/ConceptView/ConceptScene";
 import { ConceptPlayer } from "@/components/ConceptView/ConceptPlayer";
 import { ConceptParams } from "@/components/ConceptView/ConceptParams";
+import { trackEvent } from "@/utils/analytics";
 
 export function ConceptViewPage() {
   const { subjectId, unitId } = useParams();
@@ -20,11 +21,13 @@ export function ConceptViewPage() {
   // Reset state when unit changes
   useEffect(() => {
     reset();
+    if (unitId) trackEvent("concept_view_start", { unit_id: unitId });
   }, [unitId, reset]);
 
   // Initialize params when step changes
   useEffect(() => {
     if (!concept) return;
+    trackEvent("concept_step_complete", { unit_id: unitId, step: activeStep });
     const step = concept.steps[activeStep];
     if (!step?.params) {
       resetParams({});
@@ -35,7 +38,7 @@ export function ConceptViewPage() {
       defaults[p.name] = p.default;
     }
     resetParams(defaults);
-  }, [activeStep, concept, resetParams]);
+  }, [activeStep, concept, resetParams, unitId]);
 
   if (!subject || !unit) {
     return (

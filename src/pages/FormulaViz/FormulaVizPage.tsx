@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { cn } from "@/utils/cn";
+import { trackEvent } from "@/utils/analytics";
 import { SquareExpansion } from "@/components/FormulaViz/SquareExpansion";
 import { DiffOfSquares } from "@/components/FormulaViz/DiffOfSquares";
 import { CircleArea } from "@/components/FormulaViz/CircleArea";
@@ -99,7 +100,7 @@ export function FormulaVizPage() {
         {filtered.map((t) => (
           <button
             key={t.id}
-            onClick={() => setTab(t.id)}
+            onClick={() => { setTab(t.id); trackEvent("formula_viz_view", { tab: t.id }); }}
             className={cn(
               "shrink-0 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors",
               tab === t.id

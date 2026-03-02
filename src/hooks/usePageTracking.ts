@@ -1,0 +1,11 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router";
+import { trackPageView } from "@/utils/analytics";
+
+export function usePageTracking() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    trackPageView(pathname);
+  }, [pathname]);
+}

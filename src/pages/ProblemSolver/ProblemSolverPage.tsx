@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { getSubject, getUnit } from "@/content";
 import { usePyodide } from "@/hooks/usePyodide";
+import { trackEvent } from "@/utils/analytics";
 import { useSolverStore } from "@/store/useSolverStore";
 import { problemToRequest } from "@/engine/step-generator";
 import type { ParsedProblem } from "@/engine/step-generator";
@@ -31,6 +32,7 @@ export function ProblemSolverPage() {
 
   const handleSubmit = async (parsed: ParsedProblem) => {
     startComputation(parsed);
+    trackEvent("problem_solve", { type: parsed.type });
     try {
       const result = await computeSolve(problemToRequest(parsed));
       setSolution(result);

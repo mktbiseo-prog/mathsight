@@ -2,6 +2,7 @@ import type { FormEvent } from "react";
 import { Plus } from "lucide-react";
 import { useExploreStore } from "@/store/useExploreStore";
 import { cn } from "@/utils/cn";
+import { trackEvent } from "@/utils/analytics";
 
 export function FunctionInput() {
   const inputValue = useExploreStore((s) => s.inputValue);
@@ -13,6 +14,7 @@ export function FunctionInput() {
     e.preventDefault();
     if (inputValue.trim()) {
       addFunction(inputValue.trim());
+      trackEvent("explore_function_add", { expr: inputValue.trim() });
     }
   };
 
