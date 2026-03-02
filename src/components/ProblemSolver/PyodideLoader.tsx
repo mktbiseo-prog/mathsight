@@ -25,6 +25,23 @@ export function PyodideLoader() {
     return () => clearInterval(timer);
   }, []);
 
+  if (status === "error") {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4 py-12">
+        <div className="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+          <span className="text-red-500 text-xl">!</span>
+        </div>
+        <p className="text-sm font-medium text-red-600 dark:text-red-400">{message || "엔진 로딩 실패"}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+        >
+          새로고침
+        </button>
+      </div>
+    );
+  }
+
   if (status !== "loading" && status !== "idle") return null;
 
   return (

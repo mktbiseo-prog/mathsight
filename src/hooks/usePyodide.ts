@@ -18,11 +18,13 @@ export function usePyodide() {
       setPyodideProgress("ready", "준비 완료", 100);
       return;
     }
-    if (currentStatus === "idle") {
-      const unsubscribe = onProgress((progress) => {
-        setPyodideProgress(progress.status, progress.message, progress.percent);
-      });
 
+    // Register progress listener for both idle AND loading states
+    const unsubscribe = onProgress((progress) => {
+      setPyodideProgress(progress.status, progress.message, progress.percent);
+    });
+
+    if (currentStatus === "idle") {
       initPyodide().catch((err) => {
         setPyodideProgress(
           "error",
@@ -30,9 +32,9 @@ export function usePyodide() {
           0,
         );
       });
-
-      return unsubscribe;
     }
+
+    return unsubscribe;
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const computeSolution = useCallback(

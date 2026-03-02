@@ -74,11 +74,9 @@ function handleMessage(event: MessageEvent<WorkerResponse>) {
     progressListeners.forEach((cb) =>
       cb({ status: "ready", message: "준비 완료", percent: 100 }),
     );
-    const pending = pendingRequests.get(id);
-    if (pending) {
-      pending.resolve(undefined);
-      pendingRequests.delete(id);
-    }
+    // Resolve ALL pending init requests (including secondary callers waiting on "loading" state)
+    pendingRequests.forEach(({ resolve }) => resolve(undefined));
+    pendingRequests.clear();
     return;
   }
 
@@ -116,9 +114,24 @@ export async function initPyodide(): Promise<void> {
   const id = crypto.randomUUID();
 
   return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      pendingRequests.delete(id);
+      status = "error";
+      progressListeners.forEach((cb) =>
+        cb({ status: "error", message: "엔진 로딩 시간 초과 (90초). 새로고침 해주세요.", percent: 0 }),
+      );
+      reject(new Error("Pyodide 로딩 시간 초과 (90초)"));
+    }, 90_000);
+
     pendingRequests.set(id, {
-      resolve: resolve as (v: unknown) => void,
-      reject,
+      resolve: (v) => {
+        clearTimeout(timer);
+        (resolve as (v: unknown) => void)(v);
+      },
+      reject: (err) => {
+        clearTimeout(timer);
+        reject(err);
+      },
     });
     w.postMessage({ id, type: "init", payload: {} });
   });

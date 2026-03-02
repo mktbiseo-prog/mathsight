@@ -14,7 +14,9 @@ export function Layout() {
 
   // Eagerly preload Pyodide in the background so it's ready when user opens solver
   useEffect(() => {
-    initPyodide().catch(() => {});
+    initPyodide().catch((err) => {
+      console.warn("[MathSight] Pyodide preload failed:", err);
+    });
   }, []);
 
   const [showOnboarding, setShowOnboarding] = useState(shouldShowOnboarding);
