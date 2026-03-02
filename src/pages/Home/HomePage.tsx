@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Sparkles, HelpCircle } from "lucide-react";
+import { Sparkles, HelpCircle, Box } from "lucide-react";
 import { SUBJECTS } from "@/content";
 import { useAppStore } from "@/store/useAppStore";
 import { SubjectSection } from "@/components/Home/SubjectSection";
@@ -35,7 +35,7 @@ export function HomePage() {
       </div>
 
       {/* CTAs */}
-      <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl sm:max-w-none mx-auto">
+      <div className="mt-12 grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 max-w-2xl sm:max-w-none mx-auto">
         <div className="text-center">
           <Link
             to="/explore"
@@ -68,6 +68,18 @@ export function HomePage() {
           </Link>
           <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
             공식을 외우지 말고 눈으로 이해
+          </p>
+        </div>
+        <div className="text-center">
+          <Link
+            to="/geometry-3d"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl bg-[#E65100] text-white font-medium hover:bg-[#BF360C] transition-colors shadow-md shadow-[#E65100]/20 text-sm sm:text-base"
+          >
+            <Box className="w-4 h-4 sm:w-5 sm:h-5" />
+            도형 탐험
+          </Link>
+          <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
+            3D 도형·전개도·단면 탐험
           </p>
         </div>
         <div className="text-center">
