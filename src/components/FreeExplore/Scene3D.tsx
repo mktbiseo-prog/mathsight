@@ -4,6 +4,10 @@ import { createAxes } from "@/engine/AxisHelper";
 import { createGraphLine } from "@/engine/GraphMesh";
 import { evaluatePoints } from "@/utils/mathParser";
 import { useExploreStore } from "@/store/useExploreStore";
+import { useThemeStore } from "@/store/useThemeStore";
+import { getNextColor } from "@/engine/NeonMaterial";
+
+const SCENE_BG = { light: 0xFAFAF5, dark: 0x1E1E2E } as const;
 
 export interface Scene3DHandle {
   resetCamera: () => void;
@@ -16,6 +20,7 @@ export const Scene3D = forwardRef<Scene3DHandle>(function Scene3D(_props, ref) {
   const functions = useExploreStore((s) => s.functions);
   const sliderParams = useExploreStore((s) => s.sliderParams);
   const viewSettings = useExploreStore((s) => s.viewSettings);
+  const theme = useThemeStore((s) => s.theme);
 
   useImperativeHandle(ref, () => ({
     resetCamera: () => managerRef.current?.resetCamera(),
@@ -32,6 +37,13 @@ export const Scene3D = forwardRef<Scene3DHandle>(function Scene3D(_props, ref) {
     };
   }, []);
 
+  // Update background when theme changes
+  useEffect(() => {
+    const manager = managerRef.current;
+    if (!manager) return;
+    manager.setBackground(SCENE_BG[theme]);
+  }, [theme]);
+
   // Update axes/grid
   useEffect(() => {
     const manager = managerRef.current;
@@ -42,11 +54,12 @@ export const Scene3D = forwardRef<Scene3DHandle>(function Scene3D(_props, ref) {
       showGrid: viewSettings.showGrid,
       showAxes: viewSettings.showAxes,
       showLabels: viewSettings.showLabels,
+      theme,
     });
     manager.scene.add(axes);
-  }, [viewSettings.showGrid, viewSettings.showAxes, viewSettings.showLabels, viewSettings.xRange]);
+  }, [viewSettings.showGrid, viewSettings.showAxes, viewSettings.showLabels, viewSettings.xRange, theme]);
 
-  // Update graphs when functions or slider params change
+  // Update graphs when functions, slider params, or theme change
   useEffect(() => {
     const manager = managerRef.current;
     if (!manager) return;
@@ -60,6 +73,8 @@ export const Scene3D = forwardRef<Scene3DHandle>(function Scene3D(_props, ref) {
       paramValues[name] = param.value;
     }
 
+    const isDark = theme === "dark";
+
     // Draw visible functions
     for (const fn of functions) {
       if (!fn.visible) continue;
@@ -69,10 +84,11 @@ export const Scene3D = forwardRef<Scene3DHandle>(function Scene3D(_props, ref) {
         viewSettings.resolution,
         paramValues,
       );
-      const line = createGraphLine(points, fn.color, fn.id);
+      const renderColor = getNextColor(fn.colorIndex, isDark);
+      const line = createGraphLine(points, renderColor, fn.id, fn.colorIndex);
       manager.scene.add(line);
     }
-  }, [functions, sliderParams, viewSettings.xRange, viewSettings.resolution]);
+  }, [functions, sliderParams, viewSettings.xRange, viewSettings.resolution, theme]);
 
   return (
     <div

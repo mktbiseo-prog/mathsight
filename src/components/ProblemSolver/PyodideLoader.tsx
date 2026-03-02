@@ -10,14 +10,14 @@ export function PyodideLoader() {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 py-12">
-      <Loader2 className="w-10 h-10 text-neon-blue animate-spin" />
+      <Loader2 className="w-10 h-10 text-primary animate-spin" />
       <div className="text-center space-y-2">
         <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
           {message || "SymPy 엔진 준비 중..."}
         </p>
         <div className="w-48 h-1.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
           <div
-            className="h-full bg-neon-blue rounded-full transition-all duration-500"
+            className="h-full bg-primary rounded-full transition-all duration-500"
             style={{ width: `${percent}%` }}
           />
         </div>

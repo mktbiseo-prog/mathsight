@@ -15,7 +15,7 @@ export const SUBJECTS: Subject[] = [
         description: "함수의 극한값, 극한의 성질, 연속함수",
         icon: "∞",
         conceptCount: 0,
-        color: "text-violet-400",
+        color: "text-primary",
       },
       {
         id: "derivative",
@@ -23,7 +23,7 @@ export const SUBJECTS: Subject[] = [
         description: "미분계수의 정의, 도함수, 미분법 공식",
         icon: "𝑓′",
         conceptCount: 0,
-        color: "text-indigo-400",
+        color: "text-primary",
       },
       {
         id: "extrema",
@@ -31,7 +31,7 @@ export const SUBJECTS: Subject[] = [
         description: "증가/감소, 극값 판정, 그래프 개형",
         icon: "📈",
         conceptCount: 0,
-        color: "text-blue-400",
+        color: "text-primary",
       },
       {
         id: "definite-integral",
@@ -39,7 +39,7 @@ export const SUBJECTS: Subject[] = [
         description: "정적분의 정의, 넓이 계산, 급수와 적분",
         icon: "∫",
         conceptCount: 0,
-        color: "text-cyan-400",
+        color: "text-primary",
       },
     ],
   },
@@ -57,7 +57,7 @@ export const SUBJECTS: Subject[] = [
         description: "무한급수, 수렴 판정법, 등비급수",
         icon: "Σ",
         conceptCount: 0,
-        color: "text-emerald-400",
+        color: "text-success",
       },
       {
         id: "differentiation-methods",
@@ -65,7 +65,7 @@ export const SUBJECTS: Subject[] = [
         description: "합성함수, 매개변수, 음함수 미분",
         icon: "∂",
         conceptCount: 0,
-        color: "text-green-400",
+        color: "text-success",
       },
       {
         id: "substitution-integral",
@@ -73,7 +73,7 @@ export const SUBJECTS: Subject[] = [
         description: "치환적분법, 부분적분법",
         icon: "∮",
         conceptCount: 0,
-        color: "text-teal-400",
+        color: "text-success",
       },
       {
         id: "velocity-acceleration",
@@ -81,7 +81,7 @@ export const SUBJECTS: Subject[] = [
         description: "위치·속도·가속도의 관계, 운동 해석",
         icon: "🚀",
         conceptCount: 0,
-        color: "text-lime-400",
+        color: "text-success",
       },
       {
         id: "volume-of-revolution",
@@ -89,7 +89,7 @@ export const SUBJECTS: Subject[] = [
         description: "x축/y축 회전, 디스크·와셔법",
         icon: "🔄",
         conceptCount: 0,
-        color: "text-amber-400",
+        color: "text-amber",
       },
     ],
   },
@@ -107,7 +107,7 @@ export const SUBJECTS: Subject[] = [
         description: "포물선, 타원, 쌍곡선의 방정식과 성질",
         icon: "⭕",
         conceptCount: 0,
-        color: "text-rose-400",
+        color: "text-error",
       },
       {
         id: "vector-operations",
@@ -115,7 +115,7 @@ export const SUBJECTS: Subject[] = [
         description: "벡터 덧셈, 스칼라배, 내적, 수직·평행",
         icon: "→",
         conceptCount: 0,
-        color: "text-pink-400",
+        color: "text-error",
       },
       {
         id: "space-geometry",
@@ -123,7 +123,7 @@ export const SUBJECTS: Subject[] = [
         description: "공간좌표, 구의 방정식, 평면의 방정식",
         icon: "🧊",
         conceptCount: 0,
-        color: "text-fuchsia-400",
+        color: "text-error",
       },
     ],
   },

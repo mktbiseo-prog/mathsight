@@ -27,11 +27,11 @@ export function FunctionInput() {
           "w-full pl-4 pr-12 py-2.5 rounded-xl",
           "bg-white dark:bg-surface-card border",
           parseError
-            ? "border-red-500 dark:border-red-500"
-            : "border-gray-300 dark:border-white/10",
+            ? "border-error dark:border-error"
+            : "border-border-warm dark:border-white/10",
           "text-gray-900 dark:text-white font-mono text-sm",
           "placeholder:text-gray-400 dark:placeholder:text-gray-500",
-          "focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30",
+          "focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30",
         )}
         autoComplete="off"
         spellCheck={false}
@@ -43,7 +43,7 @@ export function FunctionInput() {
         <Plus className="w-5 h-5" />
       </button>
       {parseError && (
-        <p className="absolute -bottom-5 left-2 text-xs text-red-400 truncate max-w-full">
+        <p className="absolute -bottom-5 left-2 text-xs text-error truncate max-w-full">
           {parseError}
         </p>
       )}

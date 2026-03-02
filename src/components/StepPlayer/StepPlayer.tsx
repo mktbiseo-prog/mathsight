@@ -28,7 +28,7 @@ export function StepPlayer({
             "w-full text-left px-4 py-3 rounded-lg transition-all",
             "border-l-2",
             activeIndex === i
-              ? "border-l-neon-blue bg-blue-50 dark:bg-neon-blue/5"
+              ? "border-l-primary bg-primary-light dark:bg-primary/10"
               : "border-l-transparent hover:bg-gray-50 dark:hover:bg-white/5",
           )}
           style={{ animationDelay: `${i * 80}ms` }}
@@ -38,7 +38,7 @@ export function StepPlayer({
               className={cn(
                 "shrink-0 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold",
                 activeIndex === i
-                  ? "bg-neon-blue/20 text-neon-blue"
+                  ? "bg-primary/15 text-primary"
                   : "bg-gray-200 dark:bg-white/10 text-gray-500 dark:text-gray-400",
               )}
             >
@@ -61,20 +61,20 @@ export function StepPlayer({
         className={cn(
           "flex items-center gap-2 px-4 py-3 rounded-lg mt-2",
           verified
-            ? "bg-emerald-50 dark:bg-emerald-500/5"
-            : "bg-red-50 dark:bg-red-500/5",
+            ? "bg-success-light dark:bg-success/10"
+            : "bg-error-light dark:bg-error/10",
         )}
       >
         {verified ? (
-          <CheckCircle className="w-5 h-5 text-emerald-500 shrink-0" />
+          <CheckCircle className="w-5 h-5 text-success shrink-0" />
         ) : (
-          <XCircle className="w-5 h-5 text-red-500 shrink-0" />
+          <XCircle className="w-5 h-5 text-error shrink-0" />
         )}
         <div>
           <p
             className={cn(
               "text-sm font-medium",
-              verified ? "text-emerald-700 dark:text-emerald-400" : "text-red-700 dark:text-red-400",
+              verified ? "text-success" : "text-error",
             )}
           >
             {verified ? "검증 완료" : "검증 실패"}

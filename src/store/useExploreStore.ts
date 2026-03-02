@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { GraphFunction, SliderParam, ViewSettings, NeonColor } from "@/types/explore";
+import type { GraphFunction, SliderParam, ViewSettings } from "@/types/explore";
 import { parseExpression } from "@/utils/mathParser";
 import { getNextColor } from "@/engine/NeonMaterial";
 
@@ -35,13 +35,15 @@ export const useExploreStore = create<ExploreStore>((set, get) => ({
       return;
     }
 
-    const color: NeonColor = getNextColor(colorIndex++);
+    const idx = colorIndex++;
+    const color = getNextColor(idx);
     const fn: GraphFunction = {
       id: crypto.randomUUID(),
       expression,
       normalizedExpr: result.normalizedExpr,
       compiled: result.compiled,
       color,
+      colorIndex: idx,
       visible: true,
       parameters: result.parameters,
     };
@@ -110,9 +112,9 @@ export const useExploreStore = create<ExploreStore>((set, get) => ({
     showGrid: true,
     showAxes: true,
     showLabels: true,
-    xRange: [-10, 10],
-    yRange: [-10, 10],
-    resolution: 500,
+    xRange: [-100, 100],
+    yRange: [-100, 100],
+    resolution: 5000,
   },
 
   toggleGrid: () =>

@@ -15,7 +15,7 @@ export class SceneManager {
     this.container = container;
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x0a0a0f);
+    this.scene.background = new THREE.Color(0x1a1a2e);
 
     const { clientWidth: w, clientHeight: h } = container;
     this.camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 1000);
@@ -31,7 +31,7 @@ export class SceneManager {
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.08;
     this.controls.minDistance = 3;
-    this.controls.maxDistance = 80;
+    this.controls.maxDistance = 300;
 
     const ambient = new THREE.AmbientLight(0xffffff, 0.4);
     const directional = new THREE.DirectionalLight(0xffffff, 0.8);

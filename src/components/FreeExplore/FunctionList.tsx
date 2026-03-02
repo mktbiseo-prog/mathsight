@@ -1,11 +1,14 @@
 import { Eye, EyeOff, X } from "lucide-react";
 import { useExploreStore } from "@/store/useExploreStore";
+import { useThemeStore } from "@/store/useThemeStore";
+import { getNextColor } from "@/engine/NeonMaterial";
 import { cn } from "@/utils/cn";
 
 export function FunctionList() {
   const functions = useExploreStore((s) => s.functions);
   const removeFunction = useExploreStore((s) => s.removeFunction);
   const toggleVis = useExploreStore((s) => s.toggleFunctionVisibility);
+  const theme = useThemeStore((s) => s.theme);
 
   if (functions.length === 0) return null;
 
@@ -16,13 +19,13 @@ export function FunctionList() {
           key={fn.id}
           className={cn(
             "inline-flex items-center gap-2 px-3 py-1.5 rounded-lg",
-            "bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-mono",
+            "bg-bg-card dark:bg-white/5 border border-border-warm dark:border-white/10 text-sm font-mono",
             !fn.visible && "opacity-40",
           )}
         >
           <span
             className="w-2.5 h-2.5 rounded-full shrink-0"
-            style={{ backgroundColor: fn.color }}
+            style={{ backgroundColor: getNextColor(fn.colorIndex, theme === "dark") }}
           />
           <span className="text-gray-700 dark:text-gray-200 truncate max-w-40">
             {fn.expression}
@@ -35,7 +38,7 @@ export function FunctionList() {
           </button>
           <button
             onClick={() => removeFunction(fn.id)}
-            className="text-gray-400 hover:text-red-400"
+            className="text-gray-400 hover:text-error"
           >
             <X size={14} />
           </button>

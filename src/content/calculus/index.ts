@@ -1,2 +1,14 @@
-// 미적분 단원별 상세 콘텐츠 — Phase 4에서 구현
-export {};
+import type { ConceptData } from "@/types/concept";
+import { seriesConvergence } from "./series-convergence";
+import { differentiationMethods } from "./differentiation-methods";
+import { substitutionIntegral } from "./substitution-integral";
+import { velocityAcceleration } from "./velocity-acceleration";
+import { volumeOfRevolution } from "./volume-of-revolution";
+
+export const calculusConcepts: ConceptData[] = [
+  seriesConvergence,
+  differentiationMethods,
+  substitutionIntegral,
+  velocityAcceleration,
+  volumeOfRevolution,
+];

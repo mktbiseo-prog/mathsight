@@ -1,2 +1,10 @@
-// 기하와 벡터 단원별 상세 콘텐츠 — Phase 4에서 구현
-export {};
+import type { ConceptData } from "@/types/concept";
+import { conicSections } from "./conic-sections";
+import { vectorOperations } from "./vector-operations";
+import { spaceGeometry } from "./space-geometry";
+
+export const geometryConcepts: ConceptData[] = [
+  conicSections,
+  vectorOperations,
+  spaceGeometry,
+];

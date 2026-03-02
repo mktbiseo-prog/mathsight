@@ -7,10 +7,10 @@ interface ThemeStore {
 }
 
 function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
+  if (typeof window === "undefined") return "light";
   const stored = localStorage.getItem("mathsight-theme") as Theme | null;
   if (stored === "light" || stored === "dark") return stored;
-  return "dark";
+  return "light";
 }
 
 export const useThemeStore = create<ThemeStore>((set, get) => ({

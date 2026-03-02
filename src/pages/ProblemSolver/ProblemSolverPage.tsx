@@ -48,7 +48,7 @@ export function ProblemSolverPage() {
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Top bar */}
       {subject && unit && (
-        <div className="shrink-0 px-4 py-2 border-b border-gray-200 dark:border-white/10">
+        <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6">
           <Link
             to="/"
             className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
@@ -61,7 +61,7 @@ export function ProblemSolverPage() {
 
       <div className="flex-1 flex min-h-0">
         {/* Left panel: 풀이 */}
-        <div className="w-full md:w-[45%] border-r border-gray-200 dark:border-white/10 flex flex-col min-h-0">
+        <div className="w-full md:w-[45%] border-r border-border-warm dark:border-white/6 flex flex-col min-h-0">
           <div className="shrink-0 p-4 space-y-4 border-b border-gray-100 dark:border-white/5">
             <MathInput onSubmit={handleSubmit} disabled={isComputing} />
           </div>
@@ -81,8 +81,8 @@ export function ProblemSolverPage() {
             )}
 
             {error && (
-              <div className="px-4 py-3 rounded-lg bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20">
-                <p className="text-sm text-red-600 dark:text-red-400">
+              <div className="px-4 py-3 rounded-lg bg-error-light dark:bg-error/10 border border-error/20">
+                <p className="text-sm text-error">
                   {error}
                 </p>
               </div>
@@ -101,14 +101,14 @@ export function ProblemSolverPage() {
         </div>
 
         {/* Right panel: 결과 */}
-        <div className="hidden md:flex flex-1 items-center justify-center bg-gray-50 dark:bg-surface-card/30 p-8">
+        <div className="hidden md:flex flex-1 items-center justify-center bg-bg-card dark:bg-surface-card/30 p-8">
           {solution ? (
             <div className="text-center space-y-6 max-w-lg">
               <div className="space-y-2">
                 <p className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                   결과
                 </p>
-                <div className="p-6 rounded-2xl bg-white dark:bg-surface-card border border-gray-200 dark:border-white/10">
+                <div className="p-6 rounded-2xl bg-white dark:bg-surface-card border border-border-warm dark:border-white/6">
                   <KaTeX
                     latex={solution.resultLatex}
                     display

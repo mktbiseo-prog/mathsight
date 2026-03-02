@@ -26,8 +26,8 @@ function ToolButton({
       className={cn(
         "p-2 rounded-lg transition-colors",
         active
-          ? "bg-gray-200 dark:bg-white/15 text-gray-900 dark:text-white"
-          : "text-gray-400 dark:text-gray-500 hover:bg-gray-200 dark:hover:bg-white/10 hover:text-gray-700 dark:hover:text-gray-300",
+          ? "bg-primary-light dark:bg-white/15 text-primary dark:text-white"
+          : "text-gray-400 dark:text-gray-500 hover:bg-primary-light/50 dark:hover:bg-white/10 hover:text-gray-700 dark:hover:text-gray-300",
       )}
     >
       {icon}
@@ -45,7 +45,7 @@ export function FreeExplorePage() {
   return (
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Top bar */}
-      <div className="shrink-0 px-4 py-3 space-y-2 border-b border-gray-200 dark:border-white/10 bg-white/90 dark:bg-surface-dark/90 backdrop-blur">
+      <div className="shrink-0 px-4 py-3 space-y-2 border-b border-border-warm dark:border-white/6 bg-white/90 dark:bg-surface-dark/90 backdrop-blur">
         <div className="flex gap-3 items-start max-w-6xl mx-auto">
           <div className="flex-1 space-y-2">
             <FunctionInput />

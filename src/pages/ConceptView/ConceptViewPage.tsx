@@ -1,11 +1,41 @@
+import { useEffect } from "react";
 import { useParams, Link } from "react-router";
-import { ArrowLeft, Play } from "lucide-react";
-import { getSubject, getUnit } from "@/content";
+import { ArrowLeft } from "lucide-react";
+import { getSubject, getUnit, getConceptData } from "@/content";
+import { useConceptStore } from "@/store/useConceptStore";
+import { ConceptScene } from "@/components/ConceptView/ConceptScene";
+import { ConceptPlayer } from "@/components/ConceptView/ConceptPlayer";
+import { ConceptParams } from "@/components/ConceptView/ConceptParams";
 
 export function ConceptViewPage() {
   const { subjectId, unitId } = useParams();
   const subject = getSubject(subjectId ?? "");
   const unit = subject ? getUnit(subject.id, unitId ?? "") : undefined;
+  const concept = unitId ? getConceptData(unitId) : undefined;
+
+  const activeStep = useConceptStore((s) => s.activeStep);
+  const reset = useConceptStore((s) => s.reset);
+  const resetParams = useConceptStore((s) => s.resetParams);
+
+  // Reset state when unit changes
+  useEffect(() => {
+    reset();
+  }, [unitId, reset]);
+
+  // Initialize params when step changes
+  useEffect(() => {
+    if (!concept) return;
+    const step = concept.steps[activeStep];
+    if (!step?.params) {
+      resetParams({});
+      return;
+    }
+    const defaults: Record<string, number> = {};
+    for (const p of step.params) {
+      defaults[p.name] = p.default;
+    }
+    resetParams(defaults);
+  }, [activeStep, concept, resetParams]);
 
   if (!subject || !unit) {
     return (
@@ -13,7 +43,7 @@ export function ConceptViewPage() {
         <div className="text-center space-y-4">
           <p className="text-6xl">🔍</p>
           <p className="text-gray-500 dark:text-gray-400">단원을 찾을 수 없습니다</p>
-          <Link to="/" className="inline-block text-neon-blue hover:underline">
+          <Link to="/" className="inline-block text-primary hover:underline">
             홈으로 돌아가기
           </Link>
         </div>
@@ -21,36 +51,55 @@ export function ConceptViewPage() {
     );
   }
 
+  if (!concept) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <p className="text-6xl">{unit.icon}</p>
+          <h1 className="text-2xl font-bold">{unit.name}</h1>
+          <p className="text-gray-500 dark:text-gray-400">
+            이 단원의 시각화 데이터가 준비 중입니다.
+          </p>
+          <Link to="/" className="inline-block text-primary hover:underline">
+            홈으로 돌아가기
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const currentStep = concept.steps[activeStep];
+  const currentParams = currentStep?.params ?? [];
+
   return (
-    <div className="px-4 py-8 max-w-6xl mx-auto">
-      <Link
-        to="/"
-        className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        {subject.name}
-      </Link>
+    <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+      {/* Top bar */}
+      <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6 flex items-center justify-between">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          {subject.name} &gt; {unit.name}
+        </Link>
+        <Link
+          to={`/solve/${subjectId}/${unitId}`}
+          className="text-xs px-3 py-1 rounded-md bg-primary-light dark:bg-white/5 text-primary dark:text-gray-400 hover:bg-primary/10 dark:hover:bg-white/10 transition-colors"
+        >
+          문제 풀기
+        </Link>
+      </div>
 
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="text-center space-y-6">
-          <span className={`text-6xl ${unit.color}`}>{unit.icon}</span>
-          <h1 className="text-3xl font-bold">{unit.name}</h1>
-          <p className="text-gray-500 dark:text-gray-400">{unit.description}</p>
+      <div className="flex-1 flex min-h-0">
+        {/* Left panel: step player */}
+        <div className="w-full md:w-[320px] border-r border-border-warm dark:border-white/6 flex flex-col min-h-0">
+          <ConceptPlayer concept={concept} />
+        </div>
 
-          <div className="pt-4 space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-white/5 text-sm text-gray-500 dark:text-gray-400">
-              <Play className="w-4 h-4" />
-              개념 시각화 — Phase 4에서 구현 예정
-            </div>
-            <div className="flex gap-3 justify-center">
-              <Link
-                to={`/solve/${subjectId}/${unitId}`}
-                className="px-4 py-2 rounded-lg bg-gray-900 dark:bg-white/10 text-white text-sm font-medium hover:bg-gray-800 dark:hover:bg-white/15 transition-colors"
-              >
-                문제 풀기
-              </Link>
-            </div>
-          </div>
+        {/* Right panel: 3D visualization */}
+        <div className="hidden md:flex flex-1 relative">
+          <ConceptScene concept={concept} />
+          <ConceptParams paramDefs={currentParams} />
         </div>
       </div>
     </div>

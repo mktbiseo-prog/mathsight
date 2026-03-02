@@ -16,15 +16,15 @@ export function UnitList({ units, subjectId, isVisible }: UnitListProps) {
     <div
       className={cn(
         "overflow-hidden transition-all duration-300",
-        isVisible ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0"
+        isVisible ? "max-h-[500px] opacity-100 mt-3" : "max-h-0 opacity-0",
       )}
     >
-      <div className="rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-surface-card overflow-hidden divide-y divide-gray-100 dark:divide-white/5">
+      <div className="rounded-xl border border-border-warm dark:border-white/6 bg-bg-card dark:bg-surface-card overflow-hidden divide-y divide-gray-100 dark:divide-white/5">
         {units.map((unit, index) => (
           <button
             key={unit.id}
             onClick={() => navigate(`/concept/${subjectId}/${unit.id}`)}
-            className="w-full flex items-center gap-4 px-5 py-4 hover:bg-gray-50 dark:hover:bg-surface-hover transition-colors text-left group"
+            className="w-full flex items-center gap-4 px-5 py-4 hover:bg-primary-light/50 dark:hover:bg-surface-hover transition-colors text-left group"
           >
             <span className="text-sm text-gray-400 dark:text-gray-500 font-mono w-5 text-right">
               {String(index + 1).padStart(2, "0")}

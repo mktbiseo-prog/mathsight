@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router";
-import { Compass } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { cn } from "@/utils/cn";
 
@@ -13,12 +12,14 @@ export function Header() {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-surface-dark/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border-warm dark:border-white/6 bg-white/80 dark:bg-surface-dark/80 backdrop-blur-md">
       <div className="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <Compass className="w-6 h-6 text-neon-blue group-hover:rotate-45 transition-transform duration-300" />
-          <span className="text-lg font-bold">
-            Math<span className="text-neon-blue">Sight</span>
+          <div className="w-8 h-8 rounded-lg bg-primary/10 dark:bg-primary/20 flex items-center justify-center text-primary font-display text-lg font-bold group-hover:bg-primary/20 transition-colors">
+            π
+          </div>
+          <span className="text-lg font-bold text-gray-900 dark:text-gray-100">
+            Math<span className="text-primary">Sight</span>
           </span>
         </Link>
 
@@ -30,8 +31,8 @@ export function Header() {
               className={cn(
                 "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors",
                 location.pathname === item.to
-                  ? "bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white"
-                  : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  ? "bg-primary-light dark:bg-primary/15 text-primary dark:text-primary"
+                  : "text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white",
               )}
             >
               {item.label}

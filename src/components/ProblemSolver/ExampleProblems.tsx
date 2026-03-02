@@ -31,7 +31,7 @@ export function ExampleProblems({ onSelect }: ExampleProblemsProps) {
           <button
             key={ex.input}
             onClick={() => handleClick(ex.input)}
-            className="text-left px-3 py-2.5 rounded-lg border border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors group"
+            className="text-left px-3 py-2.5 rounded-lg border border-border-warm dark:border-white/6 hover:bg-primary-light/50 dark:hover:bg-surface-hover transition-colors group"
           >
             <div className="flex items-center gap-2">
               <span className="text-base">{ex.emoji}</span>

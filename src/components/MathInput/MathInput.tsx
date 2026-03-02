@@ -6,11 +6,11 @@ import { KaTeX } from "@/components/common/KaTeX";
 import { cn } from "@/utils/cn";
 
 const TYPE_LABELS: Record<string, { label: string; color: string }> = {
-  solve: { label: "방정식", color: "bg-violet-500/20 text-violet-300" },
-  diff: { label: "미분", color: "bg-emerald-500/20 text-emerald-300" },
-  integrate: { label: "적분", color: "bg-cyan-500/20 text-cyan-300" },
-  limit: { label: "극한", color: "bg-amber-500/20 text-amber-300" },
-  simplify: { label: "간소화", color: "bg-pink-500/20 text-pink-300" },
+  solve: { label: "방정식", color: "bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary" },
+  diff: { label: "미분", color: "bg-success/10 text-success dark:bg-success/20 dark:text-success" },
+  integrate: { label: "적분", color: "bg-graph-1/10 text-graph-1 dark:bg-graph-1/20 dark:text-graph-1" },
+  limit: { label: "극한", color: "bg-amber/10 text-amber dark:bg-amber/20 dark:text-amber" },
+  simplify: { label: "간소화", color: "bg-graph-4/10 text-graph-4 dark:bg-graph-4/20 dark:text-graph-4" },
 };
 
 interface MathInputProps {
@@ -59,7 +59,7 @@ export function MathInput({ onSubmit, disabled }: MathInputProps) {
               : "border-gray-300 dark:border-white/10",
             "text-gray-900 dark:text-white font-mono text-sm",
             "placeholder:text-gray-400 dark:placeholder:text-gray-500",
-            "focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/30",
+            "focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30",
             disabled && "opacity-50 cursor-not-allowed",
           )}
           autoComplete="off"

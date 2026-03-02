@@ -1,2 +1,12 @@
-// 수학 II 단원별 상세 콘텐츠 — Phase 4에서 구현
-export {};
+import type { ConceptData } from "@/types/concept";
+import { limitOfFunction } from "./limit-of-function";
+import { derivative } from "./derivative";
+import { extrema } from "./extrema";
+import { definiteIntegral } from "./definite-integral";
+
+export const math2Concepts: ConceptData[] = [
+  limitOfFunction,
+  derivative,
+  extrema,
+  definiteIntegral,
+];

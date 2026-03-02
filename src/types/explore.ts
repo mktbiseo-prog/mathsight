@@ -1,15 +1,20 @@
 import type { EvalFunction } from "mathjs";
 
-export type NeonColor = "#39ff14" | "#00f0ff" | "#ff00ff" | "#ff6600";
+export const GRAPH_PALETTE = [
+  "#0072B2", "#D55E00", "#009E73", "#E69F00", "#CC79A7", "#56B4E9",
+] as const;
 
-export const NEON_PALETTE: NeonColor[] = ["#39ff14", "#00f0ff", "#ff00ff", "#ff6600"];
+export const GRAPH_PALETTE_DARK = [
+  "#64B5F6", "#FFB74D", "#81C784", "#FFE082", "#F48FB1", "#90CAF9",
+] as const;
 
 export interface GraphFunction {
   id: string;
   expression: string;
   normalizedExpr: string;
   compiled: EvalFunction;
-  color: NeonColor;
+  color: string;
+  colorIndex: number;
   visible: boolean;
   parameters: string[];
 }

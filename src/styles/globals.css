@@ -3,35 +3,57 @@
 /* Dark mode: class-based toggle */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom theme tokens */
+/* Research-based color system */
 @theme {
-  --color-neon-green: #39ff14;
-  --color-neon-blue: #00f0ff;
-  --color-neon-pink: #ff00ff;
-  --color-neon-orange: #ff6600;
-  --color-neon-yellow: #ffff00;
+  /* Background */
+  --color-bg-main: #FFF8F0;
+  --color-bg-card: #FAFAFA;
+  --color-bg-cream: #FBF0D9;
+  --color-bg-input: #F5F5F5;
 
-  --color-surface-dark: #0a0a0f;
-  --color-surface-card: #12121a;
-  --color-surface-hover: #1a1a25;
-  --color-surface-light: #f8fafc;
+  /* Dark mode surfaces */
+  --color-surface-dark: #1E1E2E;
+  --color-surface-card: #2D2D3D;
+  --color-surface-hover: #353545;
 
-  --font-sans: "Pretendard Variable", "Pretendard", system-ui, sans-serif;
+  /* Accent colors */
+  --color-primary: #1976D2;
+  --color-primary-dark: #1565C0;
+  --color-primary-light: #E3F2FD;
+  --color-success: #4CAF50;
+  --color-success-light: #E8F5E9;
+  --color-error: #F44336;
+  --color-error-light: #FFEBEE;
+  --color-amber: #E69F00;
+  --color-amber-light: #FFF8E1;
+
+  /* Borders */
+  --color-border-warm: #E8E0D8;
+
+  /* Graph colors (Okabe-Ito colorblind-safe — 6색) */
+  --color-graph-1: #0072B2;
+  --color-graph-2: #D55E00;
+  --color-graph-3: #009E73;
+  --color-graph-4: #E69F00;
+  --color-graph-5: #CC79A7;
+  --color-graph-6: #56B4E9;
+  --color-math-var: #56B4E9;
+
+  /* Typography */
+  --font-sans: "DM Sans", "Noto Sans KR", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-math: "STIX Two Math", "Cambria Math", serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 }
 
 body {
-  @apply bg-surface-light text-gray-900 dark:bg-surface-dark dark:text-gray-100;
+  @apply bg-bg-main text-gray-800 dark:bg-surface-dark dark:text-gray-200;
   @apply transition-colors duration-300;
   @apply antialiased;
 }
 
 .katex {
   color: inherit;
-}
-
-.neon-glow {
-  filter: drop-shadow(0 0 6px currentColor);
 }
 
 ::-webkit-scrollbar {
@@ -43,5 +65,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-600 rounded-full;
+  @apply bg-gray-300 dark:bg-gray-600 rounded-full;
 }

@@ -8,7 +8,7 @@ export function NotFound() {
         <p className="text-gray-500 dark:text-gray-400">페이지를 찾을 수 없습니다</p>
         <Link
           to="/"
-          className="inline-block px-4 py-2 rounded-lg bg-gray-900 dark:bg-white/10 text-white text-sm font-medium hover:bg-gray-800 dark:hover:bg-white/15 transition-colors"
+          className="inline-block px-4 py-2 rounded-lg bg-primary dark:bg-primary-dark text-white text-sm font-medium hover:bg-primary-dark dark:hover:bg-primary transition-colors"
         >
           홈으로 돌아가기
         </Link>
