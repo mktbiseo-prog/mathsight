@@ -17,6 +17,7 @@ export interface GraphFunction {
   colorIndex: number;
   visible: boolean;
   parameters: string[];
+  is3D: boolean;
 }
 
 export interface SliderParam {
@@ -31,6 +32,7 @@ export interface ViewSettings {
   showGrid: boolean;
   showAxes: boolean;
   showLabels: boolean;
+  showZAxis: boolean;
   xRange: [number, number];
   yRange: [number, number];
   resolution: number;

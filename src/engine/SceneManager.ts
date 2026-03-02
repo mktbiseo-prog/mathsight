@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { killSceneAnimations } from "./animations";
 
 export class SceneManager {
   readonly scene: THREE.Scene;
@@ -115,6 +116,7 @@ export class SceneManager {
   }
 
   dispose() {
+    killSceneAnimations();
     cancelAnimationFrame(this.animationId);
     this.resizeObserver.disconnect();
     this.controls.dispose();

@@ -24,6 +24,8 @@ export function StepPlayer({
         <button
           key={i}
           onClick={() => onStepClick(i)}
+          aria-label={`단계 ${i + 1}: ${step.label}`}
+          aria-current={activeIndex === i ? "step" : undefined}
           className={cn(
             "w-full text-left px-4 py-3 rounded-lg transition-all",
             "border-l-2",
@@ -51,6 +53,11 @@ export function StepPlayer({
               <div className="overflow-x-auto">
                 <KaTeX latex={step.latex} display className="text-sm" />
               </div>
+              {step.description && activeIndex === i && (
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mt-1.5 pt-1.5 border-t border-gray-100 dark:border-white/5">
+                  {step.description}
+                </p>
+              )}
             </div>
           </div>
         </button>

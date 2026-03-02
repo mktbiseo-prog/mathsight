@@ -13,11 +13,13 @@ export interface SolveRequest {
 export interface SolutionStep {
   label: string;
   latex: string;
+  description?: string;
 }
 
 export interface SolveResult {
   result: string | string[];
   resultLatex: string;
+  resultSymPy?: string | string[];
   steps: SolutionStep[];
   verified: boolean;
 }

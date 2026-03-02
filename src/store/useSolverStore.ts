@@ -81,5 +81,6 @@ export const useSolverStore = create<SolverStore>((set, get) => ({
       solution: null,
       error: null,
       activeStepIndex: -1,
+      inputValue: "",
     }),
 }));

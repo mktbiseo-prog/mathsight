@@ -24,7 +24,7 @@ export const volumeOfRevolution: ConceptData = {
       description:
         "y = √x와 x축으로 둘러싸인 영역을 x축을 중심으로 회전시켜 회전체를 만듭니다.",
       render: ({ scene }) => {
-        const curve = createCurve(fn, 0, 4, NEON_CYAN, 200);
+        const curve = createCurve(fn, 0, 30, NEON_CYAN, 200);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -65,7 +65,7 @@ export const volumeOfRevolution: ConceptData = {
         scene.scene.add(wire);
 
         // Original curve highlighted
-        const curve = createCurve(fn, 0, 4, NEON_GREEN, 200);
+        const curve = createCurve(fn, 0, 30, NEON_GREEN, 200);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 

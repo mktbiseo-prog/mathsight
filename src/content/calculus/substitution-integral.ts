@@ -23,7 +23,7 @@ export const substitutionIntegral: ConceptData = {
         // Original: 2x * cos(x²)
         const original = createCurve(
           (x) => 2 * x * Math.cos(x * x),
-          -3, 3, NEON_CYAN,
+          -30, 30, NEON_CYAN,
         );
         original.name = "concept-original";
         scene.scene.add(original);
@@ -111,12 +111,12 @@ export const substitutionIntegral: ConceptData = {
         "∫x·eˣdx를 부분적분으로 풀어봅니다. u = x, dv = eˣdx로 놓으면 uv - ∫v du를 계산할 수 있습니다.",
       render: ({ scene }) => {
         // x * e^x
-        const integrand = createCurve((x) => x * Math.exp(x), -4, 2, NEON_CYAN);
+        const integrand = createCurve((x) => x * Math.exp(x), -30, 30, NEON_CYAN);
         integrand.name = "concept-integrand";
         scene.scene.add(integrand);
 
         // Result: x*e^x - e^x = (x-1)e^x
-        const result = createCurve((x) => (x - 1) * Math.exp(x), -4, 2, NEON_GREEN);
+        const result = createCurve((x) => (x - 1) * Math.exp(x), -30, 30, NEON_GREEN);
         result.name = "concept-result";
         scene.scene.add(result);
 

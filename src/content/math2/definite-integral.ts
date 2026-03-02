@@ -23,7 +23,7 @@ export const definiteIntegral: ConceptData = {
       description:
         "y = x²과 x축 사이의 넓이를 구하는 문제입니다. 구간 [0, 2]에서의 넓이를 어떻게 구할 수 있을까요?",
       render: ({ scene }) => {
-        const curve = createCurve(fn, -1, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -62,7 +62,7 @@ export const definiteIntegral: ConceptData = {
         { name: "n", label: "n (개수)", min: 2, max: 50, step: 1, default: 4 },
       ],
       render: ({ scene, params }) => {
-        const curve = createCurve(fn, -1, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -96,7 +96,7 @@ export const definiteIntegral: ConceptData = {
         { name: "n", label: "n (개수)", min: 5, max: 200, step: 5, default: 10 },
       ],
       render: ({ scene, params }) => {
-        const curve = createCurve(fn, -1, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -138,7 +138,7 @@ export const definiteIntegral: ConceptData = {
       description:
         "미적분학의 기본정리에 의해, 부정적분 x³/3을 구간 끝점에서 평가하면 정확한 넓이 8/3을 얻습니다.",
       render: ({ scene }) => {
-        const curve = createCurve(fn, -1, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 

@@ -16,6 +16,7 @@ import {
 export const spaceGeometry: ConceptData = {
   unitId: "space-geometry",
   title: "공간도형과 좌표",
+  is3D: true,
   steps: [
     {
       label: "공간좌표계",

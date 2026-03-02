@@ -25,7 +25,7 @@ export const derivative: ConceptData = {
       ],
       render: ({ scene, params }) => {
         const fn = (x: number) => x * x;
-        const curve = createCurve(fn, -4, 4, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -47,7 +47,7 @@ export const derivative: ConceptData = {
         const slope = (fb - fa) / (b - a || 0.001);
         const secant = createCurve(
           (x) => fa + slope * (x - a),
-          -5, 5,
+          -30, 30,
           NEON_MAGENTA,
         );
         secant.name = "concept-secant";
@@ -90,7 +90,7 @@ export const derivative: ConceptData = {
       ],
       render: ({ scene, params }) => {
         const fn = (x: number) => x * x;
-        const curve = createCurve(fn, -4, 4, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -112,7 +112,7 @@ export const derivative: ConceptData = {
         const slope = (fb - fa) / dx;
         const secant = createCurve(
           (x) => fa + slope * (x - a),
-          -5, 5,
+          -30, 30,
           NEON_MAGENTA,
         );
         secant.name = "concept-secant";
@@ -122,7 +122,7 @@ export const derivative: ConceptData = {
         const trueSlope = 2 * a;
         const tangent = createCurve(
           (x) => fa + trueSlope * (x - a),
-          -5, 5,
+          -30, 30,
           NEON_GREEN,
         );
         tangent.name = "concept-tangent";
@@ -148,7 +148,7 @@ export const derivative: ConceptData = {
       ],
       render: ({ scene, params }) => {
         const fn = (x: number) => x * x;
-        const curve = createCurve(fn, -4, 4, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -162,7 +162,7 @@ export const derivative: ConceptData = {
 
         const tangent = createCurve(
           (x) => fa + slope * (x - a),
-          a - 3, a + 3,
+          -30, 30,
           NEON_GREEN,
         );
         tangent.name = "concept-tangent";
@@ -184,11 +184,11 @@ export const derivative: ConceptData = {
       description:
         "모든 점에서의 미분계수를 모으면 도함수 f'(x) = 2x를 얻습니다. 원래 함수(파랑)와 도함수(초록)를 비교하세요.",
       render: ({ scene }) => {
-        const fn = createCurve((x) => x * x, -4, 4, NEON_CYAN);
+        const fn = createCurve((x) => x * x, -30, 30, NEON_CYAN);
         fn.name = "concept-fn";
         scene.scene.add(fn);
 
-        const deriv = createCurve((x) => 2 * x, -4, 4, NEON_GREEN);
+        const deriv = createCurve((x) => 2 * x, -30, 30, NEON_GREEN);
         deriv.name = "concept-deriv";
         scene.scene.add(deriv);
 

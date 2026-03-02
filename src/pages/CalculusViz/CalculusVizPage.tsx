@@ -135,7 +135,7 @@ export function CalculusVizPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-2 mb-3">
+              <div className="grid grid-cols-1 xs:grid-cols-3 gap-2 mb-3">
                 <StatBox label="위치 x" value={dragX.toFixed(1)} color="blue" />
                 <StatBox label="기울기 f'(x)" value={slope.toFixed(2)} color="green" />
                 <StatBox label="함수값 f(x)" value={f(dragX).toFixed(2)} color="amber" />
@@ -284,7 +284,7 @@ export function CalculusVizPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-3 gap-1.5 mb-3">
+              <div className="grid grid-cols-1 xs:grid-cols-3 gap-1.5 mb-3">
                 <StatBox label="기울기 (미분)" value={slope.toFixed(2)} color="green" />
                 <StatBox label="넓이 (적분)" value={integrate(0, dragX).toFixed(2)} color="blue" />
                 <StatBox label="함수값" value={f(dragX).toFixed(2)} color="amber" />

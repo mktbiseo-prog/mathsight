@@ -27,6 +27,11 @@ export function FunctionList() {
             className="w-2.5 h-2.5 rounded-full shrink-0"
             style={{ backgroundColor: getNextColor(fn.colorIndex, theme === "dark") }}
           />
+          {fn.is3D && (
+            <span className="text-[9px] font-bold px-1 py-0.5 rounded bg-primary/10 text-primary dark:bg-primary/20">
+              3D
+            </span>
+          )}
           <span className="text-gray-700 dark:text-gray-200 truncate max-w-40">
             {fn.expression}
           </span>

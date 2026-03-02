@@ -32,7 +32,7 @@ export const conicSections: ConceptData = {
         const parabolaTop = createParametricCurve(
           (t) => (t * t) / (4 * p),
           (t) => t,
-          -4, 4, NEON_CYAN,
+          -30, 30, NEON_CYAN,
         );
         parabolaTop.name = "concept-parabola";
         scene.scene.add(parabolaTop);
@@ -48,8 +48,8 @@ export const conicSections: ConceptData = {
 
         // Directrix x = -p
         const directrix = createDashedLine(
-          new THREE.Vector3(-p, -5, 0),
-          new THREE.Vector3(-p, 5, 0),
+          new THREE.Vector3(-p, -30, 0),
+          new THREE.Vector3(-p, 30, 0),
           0xff6600,
         );
         directrix.name = "concept-directrix";
@@ -147,7 +147,7 @@ export const conicSections: ConceptData = {
         const right = createParametricCurve(
           (t) => a / Math.cos(t),
           (t) => b * Math.tan(t),
-          -1.3, 1.3, NEON_CYAN,
+          -1.55, 1.55, NEON_CYAN,
         );
         right.name = "concept-right";
         scene.scene.add(right);
@@ -156,17 +156,17 @@ export const conicSections: ConceptData = {
         const left = createParametricCurve(
           (t) => -a / Math.cos(t),
           (t) => -b * Math.tan(t),
-          -1.3, 1.3, NEON_CYAN,
+          -1.55, 1.55, NEON_CYAN,
         );
         left.name = "concept-left";
         scene.scene.add(left);
 
         // Asymptotes
-        const asym1 = createCurve((x) => (b / a) * x, -6, 6, NEON_ORANGE);
+        const asym1 = createCurve((x) => (b / a) * x, -30, 30, NEON_ORANGE);
         asym1.name = "concept-asym1";
         scene.scene.add(asym1);
 
-        const asym2 = createCurve((x) => -(b / a) * x, -6, 6, NEON_ORANGE);
+        const asym2 = createCurve((x) => -(b / a) * x, -30, 30, NEON_ORANGE);
         asym2.name = "concept-asym2";
         scene.scene.add(asym2);
 
@@ -201,7 +201,7 @@ export const conicSections: ConceptData = {
         const parabola = createParametricCurve(
           (t) => (t * t) / 4,
           (t) => t,
-          -4, 4, NEON_GREEN,
+          -30, 30, NEON_GREEN,
         );
         parabola.name = "concept-parabola";
         scene.scene.add(parabola);
@@ -210,7 +210,7 @@ export const conicSections: ConceptData = {
         const hyperR = createParametricCurve(
           (t) => 2 / Math.cos(t),
           (t) => 1.5 * Math.tan(t),
-          -1.2, 1.2, NEON_MAGENTA,
+          -1.55, 1.55, NEON_MAGENTA,
         );
         hyperR.name = "concept-hyper-r";
         hyperR.position.y = -5;
@@ -219,7 +219,7 @@ export const conicSections: ConceptData = {
         const hyperL = createParametricCurve(
           (t) => -2 / Math.cos(t),
           (t) => -1.5 * Math.tan(t),
-          -1.2, 1.2, NEON_MAGENTA,
+          -1.55, 1.55, NEON_MAGENTA,
         );
         hyperL.name = "concept-hyper-l";
         hyperL.position.y = -5;

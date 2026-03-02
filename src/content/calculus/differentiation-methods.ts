@@ -22,12 +22,12 @@ export const differentiationMethods: ConceptData = {
         "합성함수의 미분은 바깥 함수의 미분 × 안쪽 함수의 미분입니다. f(x)=x², g(x)=sin(x)일 때 sin²(x)의 미분을 봅시다.",
       render: ({ scene }) => {
         // sin²(x)
-        const composite = createCurve((x) => Math.sin(x) ** 2, -6, 6, NEON_CYAN);
+        const composite = createCurve((x) => Math.sin(x) ** 2, -30, 30, NEON_CYAN);
         composite.name = "concept-composite";
         scene.scene.add(composite);
 
         // Its derivative: 2sin(x)cos(x) = sin(2x)
-        const deriv = createCurve((x) => Math.sin(2 * x), -6, 6, NEON_GREEN);
+        const deriv = createCurve((x) => Math.sin(2 * x), -30, 30, NEON_GREEN);
         deriv.name = "concept-deriv";
         scene.scene.add(deriv);
 
@@ -47,12 +47,12 @@ export const differentiationMethods: ConceptData = {
         "합성함수를 분해합니다. 안쪽 함수 g(x)=sin(x)와 바깥 함수 f(u)=u²를 각각 확인하세요.",
       render: ({ scene }) => {
         // g(x) = sin(x)
-        const inner = createCurve((x) => Math.sin(x), -6, 6, NEON_ORANGE);
+        const inner = createCurve((x) => Math.sin(x), -30, 30, NEON_ORANGE);
         inner.name = "concept-inner";
         scene.scene.add(inner);
 
         // f(u) = u² (shown as x²)
-        const outer = createCurve((x) => x * x, -2, 2, NEON_MAGENTA);
+        const outer = createCurve((x) => x * x, -30, 30, NEON_MAGENTA);
         outer.name = "concept-outer";
         scene.scene.add(outer);
 
@@ -105,7 +105,7 @@ export const differentiationMethods: ConceptData = {
 
         const tangent = createCurve(
           (x) => py + slope * (x - px),
-          px - 1.5, px + 1.5, NEON_MAGENTA,
+          -30, 30, NEON_MAGENTA,
         );
         tangent.name = "concept-tangent";
         scene.scene.add(tangent);
@@ -157,7 +157,7 @@ export const differentiationMethods: ConceptData = {
         const slope = Math.abs(py) > 0.01 ? -px / py : -100;
         const tang = createCurve(
           (x) => py + slope * (x - px),
-          px - 2, px + 2, NEON_GREEN,
+          -30, 30, NEON_GREEN,
         );
         tang.name = "concept-tangent";
         scene.scene.add(tang);

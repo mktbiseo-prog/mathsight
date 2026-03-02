@@ -25,7 +25,7 @@ export const extrema: ConceptData = {
       description:
         "3차 함수 f(x) = x³ - 3x의 그래프입니다. 이 함수의 증가/감소 구간과 극값을 찾아봅시다.",
       render: ({ scene }) => {
-        const curve = createCurve(fn, -3, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
       },
@@ -36,11 +36,11 @@ export const extrema: ConceptData = {
       description:
         "도함수 f'(x) = 3x² - 3입니다. f'(x) = 0인 점이 x = -1, x = 1이며, 이 점들이 극값 후보입니다.",
       render: ({ scene }) => {
-        const curve = createCurve(fn, -3, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
-        const deriv = createCurve(dfn, -3, 3, NEON_GREEN);
+        const deriv = createCurve(dfn, -30, 30, NEON_GREEN);
         deriv.name = "concept-deriv";
         scene.scene.add(deriv);
 
@@ -76,7 +76,7 @@ export const extrema: ConceptData = {
       description:
         "f'(x) > 0이면 증가(초록), f'(x) < 0이면 감소(주황) 구간입니다. 색칠된 영역을 확인하세요.",
       render: ({ scene }) => {
-        const curve = createCurve(fn, -3, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -109,7 +109,7 @@ export const extrema: ConceptData = {
       description:
         "f'(x)의 부호가 +에서 -로 바뀌는 x = -1에서 극대값 2, -에서 +로 바뀌는 x = 1에서 극소값 -2를 가집니다.",
       render: ({ scene }) => {
-        const curve = createCurve(fn, -3, 3, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 

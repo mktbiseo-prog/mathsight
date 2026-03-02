@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Sparkles } from "lucide-react";
+import { Sparkles, HelpCircle } from "lucide-react";
 import { SUBJECTS } from "@/content";
 import { useAppStore } from "@/store/useAppStore";
 import { SubjectSection } from "@/components/Home/SubjectSection";
@@ -35,39 +35,51 @@ export function HomePage() {
       </div>
 
       {/* CTAs */}
-      <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
+      <div className="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl sm:max-w-none mx-auto">
         <div className="text-center">
           <Link
             to="/explore"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary-dark transition-colors shadow-md shadow-primary/20"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary-dark transition-colors shadow-md shadow-primary/20 text-sm sm:text-base"
           >
-            <Sparkles className="w-5 h-5" />
-            자유 탐구 모드
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+            자유 탐구
           </Link>
-          <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">
+          <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
             3D 공간에서 함수를 자유롭게 탐험
           </p>
         </div>
         <div className="text-center">
           <Link
             to="/calculus-viz"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#009E73] text-white font-medium hover:bg-[#00805d] transition-colors shadow-md shadow-[#009E73]/20"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl bg-[#009E73] text-white font-medium hover:bg-[#00805d] transition-colors shadow-md shadow-[#009E73]/20 text-sm sm:text-base"
           >
-            미적분 인터랙티브
+            미적분
           </Link>
-          <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">
+          <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
             접선·극값·적분을 드래그로 체험
           </p>
         </div>
         <div className="text-center">
           <Link
             to="/formula-viz"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#7B1FA2] text-white font-medium hover:bg-[#6A1B9A] transition-colors shadow-md shadow-[#7B1FA2]/20"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl bg-[#7B1FA2] text-white font-medium hover:bg-[#6A1B9A] transition-colors shadow-md shadow-[#7B1FA2]/20 text-sm sm:text-base"
           >
-            🧮 공식 시각 유도
+            공식 유도
           </Link>
-          <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">
+          <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
             공식을 외우지 말고 눈으로 이해
+          </p>
+        </div>
+        <div className="text-center">
+          <Link
+            to="/help"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl bg-gray-600 text-white font-medium hover:bg-gray-700 transition-colors shadow-md shadow-gray-600/20 text-sm sm:text-base"
+          >
+            <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5" />
+            도움말
+          </Link>
+          <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
+            사용법과 입력 방법 안내
           </p>
         </div>
       </div>

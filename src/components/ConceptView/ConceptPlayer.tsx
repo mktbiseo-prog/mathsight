@@ -75,6 +75,7 @@ export function ConceptPlayer({ concept }: ConceptPlayerProps) {
         <button
           onClick={prevStep}
           disabled={activeStep === 0}
+          aria-label="이전 단계"
           className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronLeft className="w-5 h-5" />
@@ -85,6 +86,7 @@ export function ConceptPlayer({ concept }: ConceptPlayerProps) {
         <button
           onClick={() => nextStep(total)}
           disabled={activeStep === total - 1}
+          aria-label="다음 단계"
           className="p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
           <ChevronRight className="w-5 h-5" />

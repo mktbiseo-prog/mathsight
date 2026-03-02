@@ -5,6 +5,7 @@ export interface AxisConfig {
   showGrid: boolean;
   showAxes: boolean;
   showLabels: boolean;
+  showZAxis?: boolean;
   theme?: "light" | "dark";
 }
 
@@ -116,6 +117,14 @@ export function createAxes(config: AxisConfig): THREE.Group {
     const yLine = new THREE.Line(yGeom, new THREE.LineBasicMaterial({ color: axisColor }));
     group.add(yLine);
 
+    // Z axis (if 3D mode)
+    if (config.showZAxis) {
+      const zPoints = [new THREE.Vector3(0, 0, min - extend), new THREE.Vector3(0, 0, max + extend)];
+      const zGeom = new THREE.BufferGeometry().setFromPoints(zPoints);
+      const zLine = new THREE.Line(zGeom, new THREE.LineBasicMaterial({ color: axisColor }));
+      group.add(zLine);
+    }
+
     // Arrow heads
     const arrowSize = 0.5;
     const arrowMat = new THREE.MeshBasicMaterial({ color: colors.arrow });
@@ -130,6 +139,15 @@ export function createAxes(config: AxisConfig): THREE.Group {
     const yArrowMesh = new THREE.Mesh(yArrow, arrowMat.clone());
     yArrowMesh.position.set(0, max + extend, 0);
     group.add(yArrowMesh);
+
+    // Z arrow (if 3D mode)
+    if (config.showZAxis) {
+      const zArrow = new THREE.ConeGeometry(arrowSize * 0.4, arrowSize, 8);
+      const zArrowMesh = new THREE.Mesh(zArrow, arrowMat.clone());
+      zArrowMesh.position.set(0, 0, max + extend);
+      zArrowMesh.rotation.x = Math.PI / 2;
+      group.add(zArrowMesh);
+    }
 
     // Origin highlight
     const originGeom = new THREE.CircleGeometry(0.2, 32);
@@ -153,6 +171,10 @@ export function createAxes(config: AxisConfig): THREE.Group {
     group.add(createTextSprite("x", labelColor, new THREE.Vector3(max + 4, 0, 0), labelScale));
     group.add(createTextSprite("y", labelColor, new THREE.Vector3(0, max + 4, 0), labelScale));
 
+    if (config.showZAxis) {
+      group.add(createTextSprite("z", labelColor, new THREE.Vector3(0, 0, max + 4), labelScale));
+    }
+
     // Tick labels at labelStep intervals
     for (let v = Math.ceil(min / labelStep) * labelStep; v <= max; v += labelStep) {
       if (v === 0) continue;
@@ -165,6 +187,12 @@ export function createAxes(config: AxisConfig): THREE.Group {
       // Y tick
       const yTick = createTextSprite(text, labelColor, new THREE.Vector3(-labelOffset - 0.3, v, 0), labelScale);
       group.add(yTick);
+
+      // Z tick (if 3D mode)
+      if (config.showZAxis) {
+        const zTick = createTextSprite(text, labelColor, new THREE.Vector3(0, -labelOffset, v), labelScale);
+        group.add(zTick);
+      }
     }
 
     // Origin label

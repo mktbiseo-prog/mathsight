@@ -33,7 +33,7 @@ export const velocityAcceleration: ConceptData = {
       ],
       render: ({ scene, params }) => {
         // Position graph
-        const posCurve = createCurve(s, 0, 4, NEON_CYAN);
+        const posCurve = createCurve(s, -30, 30, NEON_CYAN);
         posCurve.name = "concept-pos-curve";
         scene.scene.add(posCurve);
 
@@ -82,11 +82,11 @@ export const velocityAcceleration: ConceptData = {
         { name: "t", label: "시간 t", min: 0, max: 4, step: 0.05, default: 0.5 },
       ],
       render: ({ scene, params }) => {
-        const posCurve = createCurve(s, 0, 4, NEON_CYAN);
+        const posCurve = createCurve(s, -30, 30, NEON_CYAN);
         posCurve.name = "concept-pos";
         scene.scene.add(posCurve);
 
-        const velCurve = createCurve(v, 0, 4, NEON_GREEN);
+        const velCurve = createCurve(v, -30, 30, NEON_GREEN);
         velCurve.name = "concept-vel";
         scene.scene.add(velCurve);
 
@@ -135,15 +135,15 @@ export const velocityAcceleration: ConceptData = {
       description:
         "가속도는 속도의 미분입니다. a > 0이면 속도 증가, a < 0이면 속도 감소. 세 함수의 관계를 확인하세요.",
       render: ({ scene }) => {
-        const posCurve = createCurve(s, 0, 4, NEON_CYAN);
+        const posCurve = createCurve(s, -30, 30, NEON_CYAN);
         posCurve.name = "concept-pos";
         scene.scene.add(posCurve);
 
-        const velCurve = createCurve(v, 0, 4, NEON_GREEN);
+        const velCurve = createCurve(v, -30, 30, NEON_GREEN);
         velCurve.name = "concept-vel";
         scene.scene.add(velCurve);
 
-        const accCurve = createCurve(acc, 0, 4, NEON_ORANGE);
+        const accCurve = createCurve(acc, -30, 30, NEON_ORANGE);
         accCurve.name = "concept-acc";
         scene.scene.add(accCurve);
 

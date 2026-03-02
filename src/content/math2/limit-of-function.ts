@@ -21,7 +21,7 @@ export const limitOfFunction: ConceptData = {
         "x=1에서 정의되지 않지만, x가 1에 가까워질수록 f(x)는 2에 수렴합니다. 이것이 극한의 핵심 아이디어입니다.",
       render: ({ scene }) => {
         const fn = (x: number) => (x * x - 1) / (x - 1);
-        const curve = createCurve(fn, -5, 5, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -54,7 +54,7 @@ export const limitOfFunction: ConceptData = {
       ],
       render: ({ scene, params }) => {
         const fn = (x: number) => (x * x - 1) / (x - 1);
-        const curve = createCurve(fn, -5, 5, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -83,8 +83,8 @@ export const limitOfFunction: ConceptData = {
 
         // Target dashed line y=2
         const target = createDashedLine(
-          new THREE.Vector3(-5, 2, 0),
-          new THREE.Vector3(5, 2, 0),
+          new THREE.Vector3(-30, 2, 0),
+          new THREE.Vector3(30, 2, 0),
           0xff00ff,
           0.15,
           0.1,
@@ -107,7 +107,7 @@ export const limitOfFunction: ConceptData = {
       ],
       render: ({ scene, params }) => {
         const fn = (x: number) => (x * x - 1) / (x - 1);
-        const curve = createCurve(fn, -5, 5, NEON_CYAN);
+        const curve = createCurve(fn, -30, 30, NEON_CYAN);
         curve.name = "concept-curve";
         scene.scene.add(curve);
 
@@ -126,8 +126,8 @@ export const limitOfFunction: ConceptData = {
         scene.scene.add(hLine);
 
         const target = createDashedLine(
-          new THREE.Vector3(-5, 2, 0),
-          new THREE.Vector3(5, 2, 0),
+          new THREE.Vector3(-30, 2, 0),
+          new THREE.Vector3(30, 2, 0),
           0xff00ff,
           0.15,
           0.1,
@@ -143,15 +143,15 @@ export const limitOfFunction: ConceptData = {
         "좌극한과 우극한이 모두 2로 같으므로, 극한값은 2입니다. 분자를 인수분해하면 (x+1)(x-1)/(x-1) = x+1 임을 알 수 있습니다.",
       render: ({ scene }) => {
         // Show simplified function y = x+1
-        const simplified = createCurve((x) => x + 1, -5, 5, NEON_GREEN);
+        const simplified = createCurve((x) => x + 1, -30, 30, NEON_GREEN);
         simplified.name = "concept-simplified";
         scene.scene.add(simplified);
 
         // Original (same graph except at x=1)
         const original = createCurve(
           (x) => (x * x - 1) / (x - 1),
-          -5,
-          5,
+          -30,
+          30,
           NEON_CYAN,
         );
         original.name = "concept-original";

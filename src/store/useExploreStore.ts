@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import type { GraphFunction, SliderParam, ViewSettings } from "@/types/explore";
-import { parseExpression } from "@/utils/mathParser";
+import { parseExpression, hasYVariable } from "@/utils/mathParser";
 import { getNextColor } from "@/engine/NeonMaterial";
 
 interface ExploreStore {
@@ -16,6 +16,7 @@ interface ExploreStore {
   toggleGrid: () => void;
   toggleAxes: () => void;
   toggleLabels: () => void;
+  toggleZAxis: () => void;
 
   inputValue: string;
   setInputValue: (v: string) => void;
@@ -46,6 +47,7 @@ export const useExploreStore = create<ExploreStore>((set, get) => ({
       colorIndex: idx,
       visible: true,
       parameters: result.parameters,
+      is3D: hasYVariable(result.normalizedExpr),
     };
 
     // Add new slider params (keep existing values)
@@ -112,6 +114,7 @@ export const useExploreStore = create<ExploreStore>((set, get) => ({
     showGrid: true,
     showAxes: true,
     showLabels: true,
+    showZAxis: false,
     xRange: [-100, 100],
     yRange: [-100, 100],
     resolution: 5000,
@@ -130,6 +133,13 @@ export const useExploreStore = create<ExploreStore>((set, get) => ({
       viewSettings: {
         ...get().viewSettings,
         showLabels: !get().viewSettings.showLabels,
+      },
+    }),
+  toggleZAxis: () =>
+    set({
+      viewSettings: {
+        ...get().viewSettings,
+        showZAxis: !get().viewSettings.showZAxis,
       },
     }),
 

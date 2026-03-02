@@ -26,5 +26,6 @@ export interface ConceptStep {
 export interface ConceptData {
   unitId: UnitId;
   title: string;
+  is3D?: boolean;
   steps: ConceptStep[];
 }

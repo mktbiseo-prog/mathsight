@@ -20,6 +20,9 @@ const CalculusVizPage = lazy(() =>
 const FormulaVizPage = lazy(() =>
   import("@/pages/FormulaViz/FormulaVizPage").then((m) => ({ default: m.FormulaVizPage }))
 );
+const HelpPage = lazy(() =>
+  import("@/pages/Help/HelpPage").then((m) => ({ default: m.HelpPage }))
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>;
@@ -36,6 +39,7 @@ export const router = createBrowserRouter([
       { path: "explore", element: <Lazy><FreeExplorePage /></Lazy> },
       { path: "calculus-viz", element: <Lazy><CalculusVizPage /></Lazy> },
       { path: "formula-viz", element: <Lazy><FormulaVizPage /></Lazy> },
+      { path: "help", element: <Lazy><HelpPage /></Lazy> },
       { path: "*", element: <NotFound /> },
     ],
   },

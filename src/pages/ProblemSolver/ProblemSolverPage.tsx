@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { getSubject, getUnit } from "@/content";
 import { usePyodide } from "@/hooks/usePyodide";
@@ -11,10 +11,11 @@ import { MathInput } from "@/components/MathInput/MathInput";
 import { StepPlayer } from "@/components/StepPlayer/StepPlayer";
 import { PyodideLoader } from "@/components/ProblemSolver/PyodideLoader";
 import { ExampleProblems } from "@/components/ProblemSolver/ExampleProblems";
-import { KaTeX } from "@/components/common/KaTeX";
+import { SolverViz } from "@/components/ProblemSolver/SolverViz";
 
 export function ProblemSolverPage() {
   const { subjectId, unitId } = useParams();
+  const navigate = useNavigate();
   const subject = subjectId ? getSubject(subjectId) : undefined;
   const unit = subject && unitId ? getUnit(subject.id, unitId) : undefined;
 
@@ -29,6 +30,7 @@ export function ProblemSolverPage() {
   const startComputation = useSolverStore((s) => s.startComputation);
   const setSolution = useSolverStore((s) => s.setSolution);
   const setError = useSolverStore((s) => s.setError);
+  const clearSolution = useSolverStore((s) => s.clearSolution);
 
   const handleSubmit = async (parsed: ParsedProblem) => {
     startComputation(parsed);
@@ -49,17 +51,27 @@ export function ProblemSolverPage() {
   return (
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Top bar */}
-      {subject && unit && (
-        <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6">
-          <Link
-            to="/"
-            className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            {subject.name} &gt; {unit.name}
-          </Link>
-        </div>
-      )}
+      <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6">
+        <button
+          onClick={() => {
+            if (solution || error) {
+              clearSolution();
+            } else if (subject && unit) {
+              navigate("/");
+            } else {
+              navigate(-1);
+            }
+          }}
+          className="inline-flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          {solution || error
+            ? "예제 목록"
+            : subject && unit
+              ? `${subject.name} > ${unit.name}`
+              : "뒤로가기"}
+        </button>
+      </div>
 
       <div className="flex-1 flex min-h-0">
         {/* Left panel: 풀이 */}
@@ -102,32 +114,13 @@ export function ProblemSolverPage() {
           </div>
         </div>
 
-        {/* Right panel: 결과 */}
-        <div className="hidden md:flex flex-1 items-center justify-center bg-bg-card dark:bg-surface-card/30 p-8">
-          {solution ? (
-            <div className="text-center space-y-6 max-w-lg">
-              <div className="space-y-2">
-                <p className="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">
-                  결과
-                </p>
-                <div className="p-6 rounded-2xl bg-white dark:bg-surface-card border border-border-warm dark:border-white/6">
-                  <KaTeX
-                    latex={solution.resultLatex}
-                    display
-                    className="text-2xl"
-                  />
-                </div>
-              </div>
-              <p className="text-sm text-gray-400 dark:text-gray-500">
-                시각화 연동은 Phase 5에서 구현됩니다
-              </p>
-            </div>
-          ) : (
-            <div className="text-center text-gray-400 dark:text-gray-500 space-y-2">
-              <p className="text-lg">수식을 입력하면</p>
-              <p className="text-lg">풀이 결과가 여기에 표시됩니다</p>
-            </div>
-          )}
+        {/* Right panel: 시각화 */}
+        <div className="hidden md:flex flex-1 min-h-0 bg-bg-card dark:bg-surface-card/30">
+          <SolverViz
+            problem={currentProblem}
+            solution={solution}
+            activeStepIndex={activeStepIndex}
+          />
         </div>
       </div>
     </div>

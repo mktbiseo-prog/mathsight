@@ -24,7 +24,7 @@ export function FunctionInput() {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        placeholder="y = x^2, sin(x), a*x^2 + b*x + c ..."
+        placeholder="y = sin(x), x^2 + y^2 (3D), a*x + b ..."
         className={cn(
           "w-full pl-4 pr-12 py-2.5 rounded-xl",
           "bg-white dark:bg-surface-card border",

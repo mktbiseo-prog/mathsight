@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Grid3X3, Axis3D, Type, RotateCcw } from "lucide-react";
+import { Grid3X3, Axis3D, Type, RotateCcw, Box } from "lucide-react";
 import { Scene3D } from "@/components/FreeExplore/Scene3D";
 import type { Scene3DHandle } from "@/components/FreeExplore/Scene3D";
 import { FunctionInput } from "@/components/FreeExplore/FunctionInput";
@@ -41,17 +41,18 @@ export function FreeExplorePage() {
   const toggleGrid = useExploreStore((s) => s.toggleGrid);
   const toggleAxes = useExploreStore((s) => s.toggleAxes);
   const toggleLabels = useExploreStore((s) => s.toggleLabels);
+  const toggleZAxis = useExploreStore((s) => s.toggleZAxis);
 
   return (
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Top bar */}
-      <div className="shrink-0 px-4 py-3 space-y-2 border-b border-border-warm dark:border-white/6 bg-white/90 dark:bg-surface-dark/90 backdrop-blur">
-        <div className="flex gap-3 items-start max-w-6xl mx-auto">
+      <div className="shrink-0 px-3 sm:px-4 py-2 sm:py-3 space-y-2 border-b border-border-warm dark:border-white/6 bg-white/90 dark:bg-surface-dark/90 backdrop-blur">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-start max-w-6xl mx-auto">
           <div className="flex-1 space-y-2">
             <FunctionInput />
             <FunctionList />
           </div>
-          <div className="flex gap-0.5 shrink-0">
+          <div className="flex gap-0.5 shrink-0 justify-end">
             <ToolButton
               active={viewSettings.showGrid}
               onClick={toggleGrid}
@@ -71,6 +72,12 @@ export function FreeExplorePage() {
               tooltip="라벨"
             />
             <ToolButton
+              active={viewSettings.showZAxis}
+              onClick={toggleZAxis}
+              icon={<Box size={18} />}
+              tooltip="Z축 (3D)"
+            />
+            <ToolButton
               onClick={() => sceneRef.current?.resetCamera()}
               icon={<RotateCcw size={18} />}
               tooltip="카메라 리셋"
@@ -84,7 +91,7 @@ export function FreeExplorePage() {
         <Scene3D ref={sceneRef} />
 
         {/* Slider panel overlay */}
-        <div className="absolute right-4 bottom-4 w-56 max-h-[50%] overflow-y-auto">
+        <div className="absolute right-2 sm:right-4 bottom-2 sm:bottom-4 w-44 sm:w-56 max-h-[50%] overflow-y-auto">
           <SliderPanel />
         </div>
       </div>
