@@ -9,6 +9,8 @@ export function createSurfaceMesh(
   const group = new THREE.Group();
   group.name = `graph-${functionId}`;
 
+  if (!data || !data.vertices || !data.indices || data.vertices.length === 0) return group;
+
   const { vertices, indices, zMin, zMax } = data;
 
   // Build geometry

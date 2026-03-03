@@ -35,7 +35,7 @@ export function HomePage() {
       </div>
 
       {/* CTAs */}
-      <div className="mt-12 grid grid-cols-2 sm:grid-cols-5 gap-3 sm:gap-4 max-w-2xl sm:max-w-none mx-auto">
+      <div className="mt-12 grid grid-cols-2 xs:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-4 max-w-sm xs:max-w-lg md:max-w-none mx-auto">
         <div className="text-center">
           <Link
             to="/explore"

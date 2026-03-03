@@ -19,7 +19,7 @@ function StatBox({ label, value, color }: { label: string; value: React.ReactNod
   const fg = { blue: "text-blue-700 dark:text-blue-400", green: "text-green-700 dark:text-green-400", red: "text-red-700 dark:text-red-400", amber: "text-amber-700 dark:text-amber-400" }[color] ?? "text-gray-700 dark:text-gray-300";
   return (
     <div className={cn("p-2.5 rounded-xl text-center", bg)}>
-      <div className={cn("text-[10px] font-semibold opacity-70", fg)}>{label}</div>
+      <div className={cn("text-xs font-semibold opacity-70", fg)}>{label}</div>
       <div className={cn("text-sm font-bold mt-0.5", fg)}>{value}</div>
     </div>
   );
@@ -33,7 +33,7 @@ function InfoCard({ children, color = "blue" }: { children: React.ReactNode; col
 function CtrlRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-2">
-      <span className="text-xs font-bold text-gray-500 dark:text-gray-400 min-w-[60px] shrink-0">{label}</span>
+      <span className="text-xs font-bold text-gray-500 dark:text-gray-400 min-w-[48px] sm:min-w-[60px] shrink-0">{label}</span>
       {children}
     </div>
   );
@@ -45,7 +45,7 @@ function CtrlBtn({ on, onClick, children }: { on?: boolean; onClick: () => void;
       type="button"
       onClick={onClick}
       className={cn(
-        "px-2.5 py-1.5 rounded-lg text-[11px] font-semibold transition-all",
+        "px-3 py-2 rounded-lg text-xs font-semibold transition-all",
         on ? "bg-primary text-white" : "bg-gray-100 dark:bg-white/10 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-white/15",
       )}
     >
@@ -91,6 +91,7 @@ function getShapeData(id: ShapeId, r = 1.2) {
     case "sphere": return { geo: new THREE.SphereGeometry(r, 32, 32), name: "구", vol: "\\frac{4}{3}\\pi r^3", surf: "4\\pi r^2" };
     case "cone": return { geo: new THREE.ConeGeometry(r, r * 2, 32), name: "원뿔", vol: "\\frac{1}{3}\\pi r^2 h", surf: "\\pi r(r+l)" };
     case "cylinder": return { geo: new THREE.CylinderGeometry(r * 0.8, r * 0.8, r * 1.8, 32), name: "원기둥", vol: "\\pi r^2 h", surf: "2\\pi r(r+h)" };
+    default: return { geo: new THREE.BoxGeometry(r, r, r), name: "도형", vol: "?", surf: "?" };
   }
 }
 
@@ -135,6 +136,8 @@ export function Geometry3DPage() {
     const d = getShapeData(shapeId);
     return [{ geometry: d.geo, color: 0x4488ff, opacity, wireframe, edges: !wireframe, edgeColor: 0x88bbff }];
   }, [shapeId, opacity, wireframe]);
+
+  const shapeData = getShapeData(shapeId);
 
   const inscribeShapes = useMemo((): ShapeConfig[] => {
     const a = 1.5;
@@ -271,8 +274,6 @@ export function Geometry3DPage() {
     return { shape2D: `원 (r=${(size * 0.8).toFixed(2)})`, desc: "원기둥을 수평으로 자르면 항상 같은 크기의 원! 어디를 잘라도 동일해요." };
   }, [crossShape, crossHeight]);
 
-  const shapeData = getShapeData(shapeId);
-
   return (
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Top bar */}
@@ -293,7 +294,7 @@ export function Geometry3DPage() {
               key={t.id}
               onClick={() => setTab(t.id)}
               className={cn(
-                "flex-shrink-0 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap",
+                "flex-shrink-0 px-3.5 py-2 rounded-lg text-xs font-semibold transition-all whitespace-nowrap",
                 tab === t.id ? "text-white shadow-sm" : "bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400",
               )}
               style={tab === t.id ? { background: t.color } : undefined}
@@ -351,7 +352,7 @@ export function Geometry3DPage() {
                   ))}
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 xs:grid-cols-3 gap-2">
                 <StatBox label="외부 V" value={K(inscribeStats.outerV)} color="blue" />
                 <StatBox label="내부 V" value={K(inscribeStats.innerV)} color="red" />
                 <StatBox label="비율" value={`${inscribeStats.ratio}%`} color="green" />
@@ -376,7 +377,7 @@ export function Geometry3DPage() {
                   <span className="text-xs font-bold text-green-600 w-8 text-right">{Math.round(unfoldSpread * 100)}%</span>
                 </CtrlRow>
               </div>
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 xs:grid-cols-3 gap-2">
                 <StatBox label="반지름" value={unfoldR.toFixed(1)} color="blue" />
                 <StatBox label="둘레" value={(2 * Math.PI * unfoldR).toFixed(2)} color="red" />
                 <StatBox label="넓이" value={(Math.PI * unfoldR * unfoldR).toFixed(2)} color="green" />
