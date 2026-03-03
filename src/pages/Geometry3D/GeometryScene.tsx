@@ -66,9 +66,13 @@ export function GeometryScene({ shapes, cameraPos = [0, 1.5, 6] }: GeometryScene
     m.setBackground(BG[theme]);
     const grid = m.scene.getObjectByName("geo-grid") as THREE.GridHelper | undefined;
     if (grid) {
-      const mats = grid.material as unknown as THREE.LineBasicMaterial[];
-      mats[0].color.set(theme === "dark" ? 0x333355 : 0xccccbb);
-      mats[1].color.set(theme === "dark" ? 0x222244 : 0xddddcc);
+      const mat = grid.material;
+      if (Array.isArray(mat)) {
+        mat[0].color.set(theme === "dark" ? 0x333355 : 0xccccbb);
+        mat[1].color.set(theme === "dark" ? 0x222244 : 0xddddcc);
+      } else {
+        (mat as THREE.LineBasicMaterial).color.set(theme === "dark" ? 0x333355 : 0xccccbb);
+      }
     }
   }, [theme]);
 
