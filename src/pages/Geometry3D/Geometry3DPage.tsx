@@ -138,7 +138,6 @@ export function Geometry3DPage() {
 
   const inscribeShapes = useMemo((): ShapeConfig[] => {
     const a = 1.5;
-    const PI = Math.PI;
     switch (inscribeId) {
       case "sph_in_cube":
         return [
@@ -198,7 +197,6 @@ export function Geometry3DPage() {
 
     if (netShape === "cube") {
       // Simplified: show cube becoming more transparent as it opens, show flat faces
-      const angle = (1 - open) * Math.PI / 2;
       if (open < 0.1) {
         return [{ geometry: new THREE.BoxGeometry(s * 2, s * 2, s * 2), color: 0x4488ff, opacity: 0.8, edges: true, edgeColor: 0x88bbff }];
       }
