@@ -201,13 +201,13 @@ async function initPyodide(requestId: string) {
   send({ id: requestId, type: "progress", payload: { message: "Pyodide 런타임 로딩 중...", percent: 10 } });
 
   const { loadPyodide } = await import(
-    /* @vite-ignore */ "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/pyodide.mjs"
+    /* @vite-ignore */ "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/pyodide.mjs"
   );
 
   send({ id: requestId, type: "progress", payload: { message: "Python 환경 초기화 중...", percent: 40 } });
 
   pyodide = await loadPyodide({
-    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.27.5/full/",
+    indexURL: "https://cdn.jsdelivr.net/pyodide/v0.29.3/full/",
   });
 
   send({ id: requestId, type: "progress", payload: { message: "SymPy 패키지 설치 중...", percent: 60 } });
