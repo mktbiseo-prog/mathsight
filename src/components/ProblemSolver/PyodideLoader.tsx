@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, RefreshCw } from "lucide-react";
 import { useSolverStore } from "@/store/useSolverStore";
+import { resetForRetry, initPyodide } from "@/engine/sympy-bridge";
 
 const MATH_FACTS = [
   "0은 자연수가 아니지만, 짝수입니다.",
@@ -16,7 +17,9 @@ export function PyodideLoader() {
   const status = useSolverStore((s) => s.pyodideStatus);
   const message = useSolverStore((s) => s.loadingMessage);
   const percent = useSolverStore((s) => s.loadingPercent);
+  const setPyodideProgress = useSolverStore((s) => s.setPyodideProgress);
   const [factIdx, setFactIdx] = useState(() => Math.floor(Math.random() * MATH_FACTS.length));
+  const [elapsed, setElapsed] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -24,6 +27,25 @@ export function PyodideLoader() {
     }, 4000);
     return () => clearInterval(timer);
   }, []);
+
+  // Track elapsed time to show retry hint
+  useEffect(() => {
+    if (status !== "loading" && status !== "idle") {
+      setElapsed(0);
+      return;
+    }
+    const timer = setInterval(() => setElapsed((e) => e + 1), 1000);
+    return () => clearInterval(timer);
+  }, [status]);
+
+  const handleRetry = () => {
+    resetForRetry();
+    setPyodideProgress("loading", "SymPy 엔진 준비 중...", 0);
+    setElapsed(0);
+    initPyodide().catch((err) => {
+      setPyodideProgress("error", err instanceof Error ? err.message : "로딩 실패", 0);
+    });
+  };
 
   if (status === "error") {
     return (
@@ -33,10 +55,11 @@ export function PyodideLoader() {
         </div>
         <p className="text-sm font-medium text-red-600 dark:text-red-400">{message || "엔진 로딩 실패"}</p>
         <button
-          onClick={() => window.location.reload()}
-          className="px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
+          onClick={handleRetry}
+          className="flex items-center gap-2 px-4 py-2 text-sm bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors"
         >
-          새로고침
+          <RefreshCw className="w-4 h-4" />
+          다시 시도
         </button>
       </div>
     );
@@ -62,7 +85,16 @@ export function PyodideLoader() {
         </p>
       </div>
 
-      {/* Math fact */}
+      {elapsed >= 15 && (
+        <button
+          onClick={handleRetry}
+          className="flex items-center gap-2 px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 border border-gray-300 dark:border-white/20 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5 transition-colors"
+        >
+          <RefreshCw className="w-3 h-3" />
+          너무 오래 걸리나요? 다시 시도
+        </button>
+      )}
+
       <div className="mt-2 px-4 py-3 rounded-xl bg-primary-light/60 dark:bg-primary/10 max-w-xs">
         <p className="text-xs font-medium text-primary mb-1">알고 계셨나요?</p>
         <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed transition-opacity duration-300">

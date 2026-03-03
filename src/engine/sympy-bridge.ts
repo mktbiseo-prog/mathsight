@@ -87,13 +87,31 @@ function handleMessage(event: MessageEvent<WorkerResponse>) {
   if (type === "result") {
     pending.resolve(payload);
   } else if (type === "error") {
-    pending.reject(new Error(payload as string));
+    const msg = payload as string;
+    status = "error";
+    progressListeners.forEach((cb) =>
+      cb({ status: "error", message: msg, percent: 0 }),
+    );
+    pending.reject(new Error(msg));
   }
 }
 
 function handleError(event: ErrorEvent) {
   status = "error";
-  pendingRequests.forEach(({ reject }) => reject(new Error(event.message)));
+  const msg = event.message || "Worker 로딩 실패";
+  progressListeners.forEach((cb) =>
+    cb({ status: "error", message: msg, percent: 0 }),
+  );
+  pendingRequests.forEach(({ reject }) => reject(new Error(msg)));
+  pendingRequests.clear();
+}
+
+export function resetForRetry(): void {
+  if (worker) {
+    worker.terminate();
+    worker = null;
+  }
+  status = "idle";
   pendingRequests.clear();
 }
 
