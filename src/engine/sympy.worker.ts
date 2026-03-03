@@ -64,7 +64,7 @@ def differentiate_expression(expr_str, var_str='x'):
                 'latex': f'\\\\frac{{d}}{{d{var_str}}}({latex(t)}) = {latex(d)}',
                 'description': f'{latex(t)} 항을 미분하면 {latex(d)}이 됩니다.'
             })
-    steps.append({'label': '도함수', 'latex': f"f'({var_str}) = {latex(result)}", 'description': f'모든 항의 미분을 합하면 도함수 f\'({var_str}) = {latex(result)}를 얻습니다.'})
+    steps.append({'label': '도함수', 'latex': f"f'({var_str}) = {latex(result)}", 'description': f"모든 항의 미분을 합하면 도함수 f'({var_str}) = {latex(result)}를 얻습니다."})
     verified = True
     for _ in range(3):
         pt = random.uniform(-5, 5)
