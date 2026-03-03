@@ -75,3 +75,14 @@ body {
 .safe-bottom {
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
+
+/* Touch-friendly range inputs on mobile */
+input[type="range"] {
+  min-height: 44px;
+  cursor: pointer;
+}
+@media (pointer: fine) {
+  input[type="range"] {
+    min-height: auto;
+  }
+}

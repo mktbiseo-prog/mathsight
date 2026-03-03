@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, Loader2 } from "lucide-react";
+import { cn } from "@/utils/cn";
 import { getSubject, getUnit } from "@/content";
 import { usePyodide } from "@/hooks/usePyodide";
 import { trackEvent } from "@/utils/analytics";
@@ -48,14 +50,22 @@ export function ProblemSolverPage() {
       ? getVerificationSummary(solution, currentProblem.type)
       : null;
 
+  const [mobileTab, setMobileTab] = useState<"solve" | "viz">("solve");
+
+  // Auto-switch to viz tab when solution arrives
+  useEffect(() => {
+    if (solution) setMobileTab("viz");
+  }, [solution]);
+
   return (
-    <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+    <div className="h-[calc(100dvh-3.5rem)] flex flex-col">
       {/* Top bar */}
       <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6">
         <button
           onClick={() => {
             if (solution || error) {
               clearSolution();
+              setMobileTab("solve");
             } else if (subject && unit) {
               navigate("/");
             } else {
@@ -73,9 +83,38 @@ export function ProblemSolverPage() {
         </button>
       </div>
 
+      {/* Mobile tab toggle */}
+      <div className="md:hidden shrink-0 flex border-b border-border-warm dark:border-white/6">
+        <button
+          onClick={() => setMobileTab("solve")}
+          className={cn(
+            "flex-1 py-2.5 text-sm font-semibold transition-colors",
+            mobileTab === "solve"
+              ? "text-primary border-b-2 border-primary"
+              : "text-gray-400 dark:text-gray-500",
+          )}
+        >
+          풀이
+        </button>
+        <button
+          onClick={() => setMobileTab("viz")}
+          className={cn(
+            "flex-1 py-2.5 text-sm font-semibold transition-colors",
+            mobileTab === "viz"
+              ? "text-primary border-b-2 border-primary"
+              : "text-gray-400 dark:text-gray-500",
+          )}
+        >
+          시각화
+        </button>
+      </div>
+
       <div className="flex-1 flex min-h-0">
         {/* Left panel: 풀이 */}
-        <div className="w-full md:w-[45%] border-r border-border-warm dark:border-white/6 flex flex-col min-h-0">
+        <div className={cn(
+          "md:w-[45%] border-r border-border-warm dark:border-white/6 flex flex-col min-h-0",
+          mobileTab === "solve" ? "flex w-full" : "hidden md:flex",
+        )}>
           <div className="shrink-0 p-4 space-y-4 border-b border-gray-100 dark:border-white/5">
             <MathInput onSubmit={handleSubmit} disabled={isComputing} />
           </div>
@@ -115,7 +154,10 @@ export function ProblemSolverPage() {
         </div>
 
         {/* Right panel: 시각화 */}
-        <div className="hidden md:flex flex-1 min-h-0 bg-bg-card dark:bg-surface-card/30">
+        <div className={cn(
+          "flex-1 min-h-0 bg-bg-card dark:bg-surface-card/30",
+          mobileTab === "viz" ? "flex" : "hidden md:flex",
+        )}>
           <SolverViz
             problem={currentProblem}
             solution={solution}

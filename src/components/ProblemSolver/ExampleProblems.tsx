@@ -26,7 +26,7 @@ export function ExampleProblems({ onSelect }: ExampleProblemsProps) {
       <p className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
         예제 문제
       </p>
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         {EXAMPLES.map((ex) => (
           <button
             key={ex.input}

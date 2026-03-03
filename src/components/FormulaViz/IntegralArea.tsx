@@ -63,7 +63,7 @@ export function IntegralArea() {
 
       <VizSlider label={`직사각형 수: ${nRect}개`} value={nRect} min={2} max={80} color={VC.red} onChange={setNRect} />
 
-      <div className="flex gap-1 mt-2">
+      <div className="flex flex-wrap gap-1 mt-2">
         {[4, 10, 20, 50, 80].map((n) => (
           <button
             key={n}

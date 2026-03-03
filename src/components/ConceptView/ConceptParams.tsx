@@ -25,7 +25,7 @@ export function ConceptParams({ paramDefs }: ConceptParamsProps) {
             step={def.step}
             value={params[def.name] ?? def.default}
             onChange={(e) => setParam(def.name, parseFloat(e.target.value))}
-            className="flex-1 h-1 accent-primary"
+            className="flex-1 accent-primary"
           />
           <span className="text-xs text-primary font-mono w-10 text-right">
             {(params[def.name] ?? def.default).toFixed(1)}

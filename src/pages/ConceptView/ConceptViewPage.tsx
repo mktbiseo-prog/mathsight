@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router";
 import { ArrowLeft } from "lucide-react";
+import { cn } from "@/utils/cn";
 import { getSubject, getUnit, getConceptData } from "@/content";
 import { useConceptStore } from "@/store/useConceptStore";
 import { ConceptScene } from "@/components/ConceptView/ConceptScene";
@@ -74,8 +75,10 @@ export function ConceptViewPage() {
   const currentStep = concept.steps[activeStep];
   const currentParams = currentStep?.params ?? [];
 
+  const [mobileTab, setMobileTab] = useState<"steps" | "3d">("steps");
+
   return (
-    <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+    <div className="h-[calc(100dvh-3.5rem)] flex flex-col">
       {/* Top bar */}
       <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6 flex items-center justify-between">
         <Link
@@ -93,14 +96,46 @@ export function ConceptViewPage() {
         </Link>
       </div>
 
+      {/* Mobile tab toggle */}
+      <div className="md:hidden shrink-0 flex border-b border-border-warm dark:border-white/6">
+        <button
+          onClick={() => setMobileTab("steps")}
+          className={cn(
+            "flex-1 py-2.5 text-sm font-semibold transition-colors",
+            mobileTab === "steps"
+              ? "text-primary border-b-2 border-primary"
+              : "text-gray-400 dark:text-gray-500",
+          )}
+        >
+          단계별 풀이
+        </button>
+        <button
+          onClick={() => setMobileTab("3d")}
+          className={cn(
+            "flex-1 py-2.5 text-sm font-semibold transition-colors",
+            mobileTab === "3d"
+              ? "text-primary border-b-2 border-primary"
+              : "text-gray-400 dark:text-gray-500",
+          )}
+        >
+          3D 시각화
+        </button>
+      </div>
+
       <div className="flex-1 flex min-h-0">
         {/* Left panel: step player */}
-        <div className="w-full md:w-[320px] border-r border-border-warm dark:border-white/6 flex flex-col min-h-0">
+        <div className={cn(
+          "md:w-[320px] border-r border-border-warm dark:border-white/6 flex flex-col min-h-0",
+          mobileTab === "steps" ? "flex w-full" : "hidden md:flex",
+        )}>
           <ConceptPlayer concept={concept} />
         </div>
 
         {/* Right panel: 3D visualization */}
-        <div className="hidden md:flex flex-1 relative">
+        <div className={cn(
+          "flex-1 relative",
+          mobileTab === "3d" ? "flex" : "hidden md:flex",
+        )}>
           <ConceptScene concept={concept} />
           <ConceptParams paramDefs={currentParams} />
         </div>

@@ -44,7 +44,7 @@ export function FreeExplorePage() {
   const toggleZAxis = useExploreStore((s) => s.toggleZAxis);
 
   return (
-    <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+    <div className="h-[calc(100dvh-3.5rem)] flex flex-col">
       {/* Top bar */}
       <div className="shrink-0 px-3 sm:px-4 py-2 sm:py-3 space-y-2 border-b border-border-warm dark:border-white/6 bg-white/90 dark:bg-surface-dark/90 backdrop-blur">
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 items-stretch sm:items-start max-w-6xl mx-auto">

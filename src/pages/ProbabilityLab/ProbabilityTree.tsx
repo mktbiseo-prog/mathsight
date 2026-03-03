@@ -100,8 +100,9 @@ export function ProbabilityTree() {
     elements.push(
       <g
         key={`node-${path}`}
-        onMouseEnter={() => setHighlighted(path)}
-        onMouseLeave={() => setHighlighted(null)}
+        onPointerEnter={() => setHighlighted(path)}
+        onPointerLeave={() => setHighlighted(null)}
+        onClick={() => setHighlighted((prev) => prev === path ? null : path)}
         style={{ cursor: "pointer" }}
       >
         <rect x={x - 40} y={y - 12} width={80} height={24} rx={8}

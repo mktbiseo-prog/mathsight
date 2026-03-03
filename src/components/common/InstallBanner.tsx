@@ -28,7 +28,7 @@ export function InstallBanner() {
         </button>
         <button
           onClick={() => setDismissed(true)}
-          className="shrink-0 p-1 rounded-full hover:bg-white/20 transition-colors"
+          className="shrink-0 p-2.5 rounded-full hover:bg-white/20 transition-colors"
         >
           <X className="w-4 h-4" />
         </button>

@@ -118,7 +118,7 @@ export function GeometryScene({ shapes, cameraPos = [0, 1.5, 6] }: GeometryScene
     <div
       ref={containerRef}
       className="w-full rounded-2xl overflow-hidden"
-      style={{ height: "min(280px, 50vh)", touchAction: "none" }}
+      style={{ height: "min(280px, 50dvh)", touchAction: "none" }}
     />
   );
 }

@@ -43,7 +43,7 @@ export function ConstructionPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+    <div className="h-[calc(100dvh-3.5rem)] flex flex-col">
       {/* Top bar */}
       <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6 flex items-center justify-between">
         <Link
@@ -97,7 +97,7 @@ export function ConstructionPage() {
             key={t.id}
             onClick={() => setTool(t.id)}
             className={cn(
-              "px-3 py-1.5 rounded-lg text-sm font-bold transition-all",
+              "px-3 py-2.5 sm:py-1.5 rounded-lg text-sm font-bold transition-all",
               tool === t.id
                 ? "bg-primary text-white shadow-sm"
                 : "bg-gray-100 dark:bg-white/5 text-gray-500 dark:text-gray-400",

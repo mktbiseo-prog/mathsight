@@ -46,7 +46,7 @@ export function CircleArea() {
         )}
       </SvgCard>
 
-      <div className="flex gap-1.5 mt-2 mb-2">
+      <div className="flex flex-wrap gap-1.5 mt-2 mb-2">
         {[4, 8, 16, 32].map((n) => (
           <button
             key={n}

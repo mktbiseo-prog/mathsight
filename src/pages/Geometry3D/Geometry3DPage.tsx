@@ -275,7 +275,7 @@ export function Geometry3DPage() {
   }, [crossShape, crossHeight]);
 
   return (
-    <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+    <div className="h-[calc(100dvh-3.5rem)] flex flex-col">
       {/* Top bar */}
       <div className="shrink-0 px-3 sm:px-4 py-2 border-b border-border-warm dark:border-white/6 bg-white/90 dark:bg-surface-dark/90 backdrop-blur">
         <div className="max-w-2xl mx-auto flex items-center gap-3">
