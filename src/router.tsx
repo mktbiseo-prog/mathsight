@@ -26,6 +26,12 @@ const HelpPage = lazy(() =>
 const Geometry3DPage = lazy(() =>
   import("@/pages/Geometry3D/Geometry3DPage").then((m) => ({ default: m.Geometry3DPage }))
 );
+const ProbabilityLabPage = lazy(() =>
+  import("@/pages/ProbabilityLab/ProbabilityLabPage").then((m) => ({ default: m.ProbabilityLabPage }))
+);
+const ConstructionPage = lazy(() =>
+  import("@/pages/Construction/ConstructionPage").then((m) => ({ default: m.ConstructionPage }))
+);
 
 function Lazy({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>;
@@ -44,6 +50,8 @@ export const router = createBrowserRouter([
       { path: "formula-viz", element: <Lazy><FormulaVizPage /></Lazy> },
       { path: "help", element: <Lazy><HelpPage /></Lazy> },
       { path: "geometry-3d", element: <Lazy><Geometry3DPage /></Lazy> },
+      { path: "prob-lab", element: <Lazy><ProbabilityLabPage /></Lazy> },
+      { path: "construction", element: <Lazy><ConstructionPage /></Lazy> },
       { path: "*", element: <NotFound /> },
     ],
   },

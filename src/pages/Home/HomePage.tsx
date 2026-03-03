@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Sparkles, HelpCircle, Box } from "lucide-react";
+import { Sparkles, HelpCircle, Box, Dice5, Pencil } from "lucide-react";
 import { SUBJECTS } from "@/content";
 import { useAppStore } from "@/store/useAppStore";
 import { SubjectSection } from "@/components/Home/SubjectSection";
@@ -35,7 +35,7 @@ export function HomePage() {
       </div>
 
       {/* CTAs */}
-      <div className="mt-12 grid grid-cols-2 xs:grid-cols-3 md:grid-cols-5 gap-2.5 sm:gap-4 max-w-sm xs:max-w-lg md:max-w-none mx-auto">
+      <div className="mt-12 grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2.5 sm:gap-4 max-w-sm xs:max-w-lg md:max-w-none mx-auto">
         <div className="text-center">
           <Link
             to="/explore"
@@ -80,6 +80,30 @@ export function HomePage() {
           </Link>
           <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
             3D 도형·전개도·단면 탐험
+          </p>
+        </div>
+        <div className="text-center">
+          <Link
+            to="/prob-lab"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl bg-[#1976D2] text-white font-medium hover:bg-[#1565C0] transition-colors shadow-md shadow-[#1976D2]/20 text-sm sm:text-base"
+          >
+            <Dice5 className="w-4 h-4 sm:w-5 sm:h-5" />
+            확률 실험
+          </Link>
+          <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
+            주사위·동전·큰 수의 법칙
+          </p>
+        </div>
+        <div className="text-center">
+          <Link
+            to="/construction"
+            className="w-full inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-xl bg-[#00796B] text-white font-medium hover:bg-[#00695C] transition-colors shadow-md shadow-[#00796B]/20 text-sm sm:text-base"
+          >
+            <Pencil className="w-4 h-4 sm:w-5 sm:h-5" />
+            작도
+          </Link>
+          <p className="text-gray-400 dark:text-gray-500 text-xs sm:text-sm mt-2 hidden sm:block">
+            자+컴퍼스 작도 시뮬레이터
           </p>
         </div>
         <div className="text-center">

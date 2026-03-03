@@ -360,4 +360,97 @@ export function createPlane3D(
   return mesh;
 }
 
+// ── Sin wave on XY plane ──
+export function createSinWave(
+  amplitude: number,
+  frequency: number,
+  phase: number,
+  xMin: number,
+  xMax: number,
+  color = NEON_CYAN,
+  segments = 400,
+): THREE.Line {
+  const pts: THREE.Vector3[] = [];
+  for (let i = 0; i <= segments; i++) {
+    const x = xMin + (xMax - xMin) * (i / segments);
+    const y = amplitude * Math.sin(frequency * x + phase);
+    pts.push(new THREE.Vector3(x, y, 0));
+  }
+  const geom = new THREE.BufferGeometry().setFromPoints(pts);
+  const mat = new THREE.LineBasicMaterial({ color });
+  return new THREE.Line(geom, mat);
+}
+
+// ── Arc (partial circle) on XY plane ──
+export function createArc(
+  cx: number,
+  cy: number,
+  radius: number,
+  startAngle: number,
+  endAngle: number,
+  color = NEON_CYAN,
+  segments = 100,
+): THREE.Line {
+  const pts: THREE.Vector3[] = [];
+  for (let i = 0; i <= segments; i++) {
+    const t = startAngle + (endAngle - startAngle) * (i / segments);
+    pts.push(new THREE.Vector3(cx + radius * Math.cos(t), cy + radius * Math.sin(t), 0));
+  }
+  const geom = new THREE.BufferGeometry().setFromPoints(pts);
+  const mat = new THREE.LineBasicMaterial({ color });
+  return new THREE.Line(geom, mat);
+}
+
+// ── 2D circle outline ──
+export function createCircle2D(
+  cx: number,
+  cy: number,
+  radius: number,
+  color = NEON_CYAN,
+  segments = 80,
+): THREE.Line {
+  return createArc(cx, cy, radius, 0, Math.PI * 2, color, segments);
+}
+
+// ── Bar chart (vertical bars in XY plane) ──
+export function createBarChart(
+  values: number[],
+  barWidth = 0.6,
+  gap = 0.2,
+  color = NEON_CYAN,
+  opacity = 0.6,
+): THREE.Group {
+  const group = new THREE.Group();
+  const stride = barWidth + gap;
+
+  for (let i = 0; i < values.length; i++) {
+    const h = values[i];
+    if (!isFinite(h)) continue;
+    const x = i * stride;
+
+    const geom = new THREE.PlaneGeometry(barWidth, Math.abs(h));
+    const mat = new THREE.MeshBasicMaterial({
+      color,
+      transparent: true,
+      opacity,
+      side: THREE.DoubleSide,
+    });
+    const bar = new THREE.Mesh(geom, mat);
+    bar.position.set(x + barWidth / 2, h / 2, 0);
+    group.add(bar);
+
+    // Border
+    const pts = [
+      new THREE.Vector3(x, 0, 0),
+      new THREE.Vector3(x, h, 0),
+      new THREE.Vector3(x + barWidth, h, 0),
+      new THREE.Vector3(x + barWidth, 0, 0),
+    ];
+    const borderGeom = new THREE.BufferGeometry().setFromPoints(pts);
+    const borderMat = new THREE.LineBasicMaterial({ color });
+    group.add(new THREE.Line(borderGeom, borderMat));
+  }
+  return group;
+}
+
 export { NEON_CYAN, NEON_GREEN, NEON_MAGENTA, NEON_ORANGE };

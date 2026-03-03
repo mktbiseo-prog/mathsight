@@ -12,8 +12,13 @@ import { UnitCircleTrig } from "@/components/FormulaViz/UnitCircleTrig";
 import { DerivativeTangent } from "@/components/FormulaViz/DerivativeTangent";
 import { IntegralArea } from "@/components/FormulaViz/IntegralArea";
 import { QuadraticFormula } from "@/components/FormulaViz/QuadraticFormula";
+import { TrigWave } from "@/components/FormulaViz/TrigWave";
+import { ExpLogMirror } from "@/components/FormulaViz/ExpLogMirror";
+import { SequenceBlocks } from "@/components/FormulaViz/SequenceBlocks";
+import { BellCurve } from "@/components/FormulaViz/BellCurve";
+import { PascalTriangle } from "@/components/FormulaViz/PascalTriangle";
 
-type Category = "middle" | "high";
+type Category = "middle" | "high" | "prob";
 
 interface TabDef {
   id: string;
@@ -33,6 +38,11 @@ const ALL_TABS: TabDef[] = [
   { id: "deriv", label: "미분", cat: "high", icon: "📈", color: "#1976D2" },
   { id: "integ", label: "적분", cat: "high", icon: "📉", color: "#D32F2F" },
   { id: "quad", label: "근의공식", cat: "high", icon: "🧮", color: "#7B1FA2" },
+  { id: "trigWave", label: "삼각파동", cat: "high", icon: "🌊", color: "#F57F17" },
+  { id: "expLog", label: "지수·로그", cat: "high", icon: "📈", color: "#E65100" },
+  { id: "seqBlocks", label: "수열 블록", cat: "high", icon: "🧱", color: "#00796B" },
+  { id: "bellCurve", label: "정규분포", cat: "prob", icon: "🔔", color: "#1976D2" },
+  { id: "pascal", label: "파스칼", cat: "prob", icon: "△", color: "#7B1FA2" },
 ];
 
 const COMPONENTS: Record<string, React.FC> = {
@@ -45,6 +55,11 @@ const COMPONENTS: Record<string, React.FC> = {
   deriv: DerivativeTangent,
   integ: IntegralArea,
   quad: QuadraticFormula,
+  trigWave: TrigWave,
+  expLog: ExpLogMirror,
+  seqBlocks: SequenceBlocks,
+  bellCurve: BellCurve,
+  pascal: PascalTriangle,
 };
 
 export function FormulaVizPage() {
@@ -76,8 +91,9 @@ export function FormulaVizPage() {
       <div className="shrink-0 px-4 py-2 border-b border-border-warm dark:border-white/6">
         <div className="flex gap-1 bg-gray-100 dark:bg-white/5 rounded-lg p-0.5">
           {([
-            { id: "middle" as Category, label: "📘 중등 수학" },
-            { id: "high" as Category, label: "📕 고등 수학" },
+            { id: "middle" as Category, label: "📘 중등" },
+            { id: "high" as Category, label: "📕 고등" },
+            { id: "prob" as Category, label: "📊 확통" },
           ]).map((c) => (
             <button
               key={c.id}
